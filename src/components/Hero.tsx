@@ -26,9 +26,9 @@ export default function Hero() {
         <img
           src="/images/real/IMG-20261013-WA0168.jpg"
           alt="Umbers Food Catering Service Authentic Feast"
-          className="w-full h-full object-cover opacity-35 scale-105 filter brightness-90"
+          className="w-full h-full object-cover opacity-50 scale-105 filter brightness-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/85 to-stone-900/75"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-950/95 via-stone-950/80 to-stone-900/60"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,10 +81,11 @@ export default function Hero() {
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
-                href="/#gallery"
+                href="/#story"
                 className="flex items-center gap-2 px-7 py-4 rounded-xl bg-stone-900/80 hover:bg-stone-800 text-white font-semibold text-base border border-stone-700 backdrop-blur-md transition-all"
               >
-                <span>View Real Kitchen Photos</span>
+                <Heart className="w-4 h-4 text-rose-400" />
+                <span>Auntie Umber's Story</span>
               </Link>
             </div>
           </div>
@@ -95,6 +96,26 @@ export default function Hero() {
               <div className="absolute -top-3.5 right-6 bg-gradient-to-r from-amber-600 to-amber-500 text-white text-[11px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md flex items-center gap-1">
                 <ChefHat className="w-3.5 h-3.5" />
                 <span>Instant Daawat Estimate</span>
+              </div>
+
+              {/* Featured Kitchen Dish Teaser */}
+              <div className="mb-4 flex items-center gap-3 p-2.5 rounded-2xl bg-black/50 border border-stone-800/80">
+                <img
+                  src="/images/real/IMG-20261013-WA0115.jpg"
+                  alt="Auntie Umber signature Dum Biryani"
+                  className="w-14 h-14 rounded-xl object-cover shrink-0 border border-amber-500/40"
+                />
+                <div className="min-w-0">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-amber-400 font-bold">
+                    Signature Family Feast
+                  </div>
+                  <div className="text-xs font-bold text-white truncate">
+                    Saffron Dum Biryani & Shami Kebabs
+                  </div>
+                  <div className="text-[10px] text-stone-400">
+                    Handcrafted in Brooklyn • 100% Zabiha Halal
+                  </div>
+                </div>
               </div>
 
               <h2 className="text-xl font-bold text-white mb-1">

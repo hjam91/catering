@@ -650,7 +650,91 @@ export default function LuxuryEditorialPage() {
         </div>
       </section>
 
-      {/* ── 5. THE BROOKLYN PROMISE (CLEAN THREE-COLUMN) ─────────────── */}
+      {/* ── 5. PRIVATE HOST STORIES & PROVENANCE ──────────────────────── */}
+      <section className="py-24 border-b border-[#23211F] bg-[#0E0D0C]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          
+          <div className="max-w-2xl mb-16 space-y-3">
+            <div className="text-[11px] uppercase tracking-[0.3em] text-[#C8A97E] font-semibold">
+              Host Notes & Provenance
+            </div>
+            <h2 className="text-4xl sm:text-5xl font-editorial font-light text-white tracking-tight">
+              Stories from the Dastarkhwan
+            </h2>
+            <p className="text-stone-400 text-sm font-light leading-relaxed">
+              Real gatherings catered across Brooklyn, from Kensington brownstones to DUMBO lofts.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                host: 'Aisha & Bilal Khan',
+                event: 'Eid Family Daawat',
+                guests: '45 Guests • Midwood',
+                note: 'Every single guest asked who cooked this. Auntie Umber’s Dum Biryani was steamed with whole cardamom and saffron milk; the Nargisi Koftay were tender perfection. Arrived smoking hot.',
+                image: '/images/real/IMG-20261013-WA0115.jpg',
+                dish: 'Plate 01: Saffron Dum Biryani & Shami Kebabs',
+              },
+              {
+                host: 'Farah & Tariq Malik',
+                event: 'Sunday Quran Ameen Brunch',
+                guests: '35 Guests • Kensington',
+                note: 'The flaky tawa parathas and bhuna qeema brought back memories of our family table in Lahore. The Badami Kheer in the Pyrex dish was finished in minutes.',
+                image: '/images/real/IMG-20261013-WA0140.jpg',
+                dish: 'Plate 02: Handmade Tawa Parathas & Bhuna Qeema',
+              },
+              {
+                host: 'Omar & Sana Siddiqui',
+                event: 'Pre-Wedding Dholki Banquet',
+                guests: '48 Guests • Bay Ridge',
+                note: 'Spotless presentation, 100% Zabiha Halal, and true warmth. The tawa roast and dahi bhallay were unforgettable. We will never host another milestone without Chef Umber.',
+                image: '/images/real/IMG-20261013-WA0168.jpg',
+                dish: 'Plate 03: Sizzling Tawa Roast & Dahi Bhallay',
+              },
+            ].map((story, idx) => (
+              <div
+                key={idx}
+                className="rounded-3xl bg-[#141311] border border-stone-850 overflow-hidden flex flex-col justify-between group hover:border-[#C8A97E]/50 transition-all shadow-xl"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-black">
+                  <img
+                    src={story.image}
+                    alt={story.dish}
+                    className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#141311] via-transparent to-transparent"></div>
+                  <div className="absolute bottom-3 left-4 right-4">
+                    <span className="text-[10px] font-mono text-[#C8A97E] uppercase tracking-wider block">
+                      {story.dish}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                  <p className="text-xs text-stone-300 font-light leading-relaxed italic">
+                    "{story.note}"
+                  </p>
+
+                  <div className="pt-4 border-t border-stone-850 flex items-center justify-between text-xs">
+                    <div>
+                      <div className="font-editorial text-white text-base">{story.host}</div>
+                      <div className="text-[11px] text-stone-500 font-mono">{story.guests}</div>
+                    </div>
+                    <span className="text-[10px] uppercase tracking-widest text-[#C8A97E] border border-[#C8A97E]/30 px-2 py-0.5 rounded-full">
+                      Verified
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── 6. THE BROOKLYN PROMISE (CLEAN THREE-COLUMN) ─────────────── */}
       <section className="py-24 border-b border-[#23211F]">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           

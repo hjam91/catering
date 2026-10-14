@@ -63,8 +63,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/#story" className="hover:text-amber-400 transition-colors">
+                  Auntie Umber's Story
+                </Link>
+              </li>
+              <li>
                 <Link href="/#gallery" className="hover:text-amber-400 transition-colors">
                   Real Event Food Gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/#stories" className="hover:text-amber-400 transition-colors">
+                  Customer Stories & Reviews
                 </Link>
               </li>
               <li>

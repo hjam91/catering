@@ -109,6 +109,70 @@ const GALLERY_ITEMS: GalleryItem[] = [
     image: '/images/real/IMG-20261013-WA0198.jpg',
     tag: 'Rainy Day & Party Snack',
     description: 'Golden crispy fritters bursting with whole coriander, fenugreek, and spices straight from the hot kadhai.'
+  },
+  {
+    id: 'g-13',
+    title: 'The Saffron Dum Biryani Feast Spread',
+    category: 'rice',
+    image: '/images/real/IMG-20261013-WA0115.jpg',
+    tag: 'Chef Umber Signature',
+    description: 'Aged basmati rice, tender chicken, whole cardamom, golden shami kebabs, and chicken roast.'
+  },
+  {
+    id: 'g-14',
+    title: 'Authentic Blistered Chicken Karahi',
+    category: 'curries',
+    image: '/images/real/IMG-20261013-WA0138.jpg',
+    tag: 'Wok Sizzled',
+    description: 'Fresh vine tomatoes, ginger juliennes, green chilies, and hand-crushed black peppercorns.'
+  },
+  {
+    id: 'g-15',
+    title: 'Homestyle Lahori Chicken Karahi Tray',
+    category: 'curries',
+    image: '/images/real/IMG-20261013-WA0194.jpg',
+    tag: 'Party Steam Tray',
+    description: 'Tender chicken braised with fragrant spices, cilantro, and ginger matchsticks in heavy catering pans.'
+  },
+  {
+    id: 'g-16',
+    title: 'Slow-Simmered Rich Mutton Korma',
+    category: 'curries',
+    image: '/images/real/IMG-20261013-WA0178.jpg',
+    tag: 'Mughlai Specialty',
+    description: 'Tender goat/mutton simmered low and slow with brown onions, yogurt, and aromatic saffron essence.'
+  },
+  {
+    id: 'g-17',
+    title: 'Authentic Degi Haleem with Garnishes',
+    category: 'curries',
+    image: '/images/real/IMG-20261013-WA0172.jpg',
+    tag: 'Slow Simmered 8 Hours',
+    description: 'Shredded beef and mixed lentils cooked to velvety perfection, garnished with ginger, lemon, and fried onions.'
+  },
+  {
+    id: 'g-18',
+    title: 'Golden Saffron Sweet Zarda Rice',
+    category: 'desserts',
+    image: '/images/real/IMG-20261013-WA0191.jpg',
+    tag: 'Celebration Sweet',
+    description: 'Fragrant sweet basmati rice infused with saffron, candied fruits, glazed cherries, and slivered pistachios.'
+  },
+  {
+    id: 'g-19',
+    title: 'Warm Desi Gajar Ka Halwa with Khoya',
+    category: 'desserts',
+    image: '/images/real/IMG-20261013-WA0192.jpg',
+    tag: 'Winter Classic',
+    description: 'Freshly grated red carrots slow-simmered in whole milk, pure desi ghee, and crowned with reduced khoya.'
+  },
+  {
+    id: 'g-20',
+    title: 'Melt-in-Mouth Shami Kebabs & Puff Bites',
+    category: 'platters',
+    image: '/images/real/IMG-20261013-WA0050.jpg',
+    tag: 'Hand-Shaped Party Platter',
+    description: 'Finely minced beef and chana dal seasoned with garam masala, pan-seared with egg wash.'
   }
 ];
 

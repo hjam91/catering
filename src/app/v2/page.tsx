@@ -66,18 +66,24 @@ export default function V2AtelierPage() {
             <span className="text-[#E5B842] font-serif italic text-sm">V2 Royal Emerald Atelier</span>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 flex-wrap justify-center">
             <Link
               href="/"
               className="px-3 py-1 rounded-full bg-stone-850 hover:bg-stone-750 text-stone-300 hover:text-white border border-stone-700 transition-colors flex items-center gap-1.5 text-[11px] font-medium"
             >
-              <span>← Switch to V1 Warm Homestyle</span>
+              <span>🏡 V1 Homestyle</span>
             </Link>
-            <span className="text-stone-600">|</span>
-            <span className="text-[#E5B842] font-semibold flex items-center gap-1 text-[11px]">
+            <span className="px-3 py-1 rounded-full bg-[#E5B842] text-[#071913] font-bold text-[11px] flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
-              <span>Active Design: V2 Luxe</span>
+              <span>👑 V2 Luxe (Active)</span>
             </span>
+            <Link
+              href="/v3"
+              className="px-3 py-1 rounded-full bg-orange-950 hover:bg-orange-900 text-orange-200 border border-orange-700 transition-colors flex items-center gap-1.5 text-[11px] font-medium"
+            >
+              <Flame className="w-3 h-3 text-orange-400" />
+              <span>🗽 V3 Brooklyn Soul</span>
+            </Link>
           </div>
         </div>
       </div>

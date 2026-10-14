@@ -41,6 +41,37 @@ export default function HomePage() {
         {/* Hero with interactive calculator */}
         <Hero />
 
+        {/* Theme Showcase Switcher */}
+        <div className="bg-stone-900 text-stone-200 px-4 py-2 text-xs border-b border-stone-800">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-bold bg-amber-600 text-white text-[10px] px-2 py-0.5 rounded-md uppercase tracking-wider">
+                Theme Switcher
+              </span>
+              <span className="text-stone-300 text-xs">Compare website presentation styles:</span>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap justify-center">
+              <span className="px-3 py-1 rounded-full bg-amber-700 text-white font-bold text-[11px] shadow-sm">
+                🏡 V1 Homestyle (Active)
+              </span>
+              <Link
+                href="/v2"
+                className="px-3 py-1 rounded-full bg-emerald-950 hover:bg-emerald-900 text-emerald-200 border border-emerald-700 font-semibold text-[11px] transition-colors flex items-center gap-1"
+              >
+                <Sparkles className="w-3 h-3 text-amber-300" />
+                <span>👑 V2 Royal Atelier</span>
+              </Link>
+              <Link
+                href="/v3"
+                className="px-3 py-1 rounded-full bg-orange-950 hover:bg-orange-900 text-orange-200 border border-orange-700 font-semibold text-[11px] transition-colors flex items-center gap-1"
+              >
+                <Flame className="w-3 h-3 text-orange-400" />
+                <span>🗽 V3 Brooklyn Soul</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         {/* Advance Notice & Capacity Banner */}
         <div className="bg-amber-100/90 border-b border-amber-300/80 px-4 py-3 text-center text-xs sm:text-sm text-amber-950 font-medium">
           <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-2">

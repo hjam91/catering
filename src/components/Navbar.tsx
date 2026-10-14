@@ -17,20 +17,25 @@ export default function Navbar() {
             <span>✨ 100% Zabiha Halal • Limited to Brooklyn, NY • Max 50 Guests • Min. 1 Week Notice</span>
           </div>
           <div className="flex items-center gap-2 text-amber-200/90 flex-wrap justify-center">
-            <span className="text-[11px] text-amber-300/80 font-medium hidden sm:inline">Try Other Styles:</span>
+            <span className="text-[11px] text-amber-300/80 font-medium hidden sm:inline">Styles:</span>
             <Link
               href="/v2"
               className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-700 font-semibold text-[11px] transition-colors"
             >
-              <Sparkles className="w-3 h-3 text-amber-400" />
-              <span>V2 Royal Luxe</span>
+              <span>V2 Luxe</span>
             </Link>
             <Link
               href="/v3"
               className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-orange-950 hover:bg-orange-900 text-orange-200 border border-orange-700 font-semibold text-[11px] transition-colors"
             >
-              <Flame className="w-3 h-3 text-orange-400" />
-              <span>V3 Brooklyn Soul</span>
+              <span>V3 Brooklyn</span>
+            </Link>
+            <Link
+              href="/v4"
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-stone-900 hover:bg-black text-[#C8A97E] border border-[#C8A97E]/60 font-semibold text-[11px] transition-colors"
+            >
+              <Sparkles className="w-3 h-3 text-[#C8A97E]" />
+              <span>V4 Editorial</span>
             </Link>
             <span className="hidden md:inline text-amber-800">|</span>
             <span className="hidden sm:flex items-center gap-1.5">

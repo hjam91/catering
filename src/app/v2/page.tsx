@@ -82,7 +82,14 @@ export default function V2AtelierPage() {
               className="px-3 py-1 rounded-full bg-orange-950 hover:bg-orange-900 text-orange-200 border border-orange-700 transition-colors flex items-center gap-1.5 text-[11px] font-medium"
             >
               <Flame className="w-3 h-3 text-orange-400" />
-              <span>🗽 V3 Brooklyn Soul</span>
+              <span>🗽 V3 Brooklyn</span>
+            </Link>
+            <Link
+              href="/v4"
+              className="px-3 py-1 rounded-full bg-stone-900 hover:bg-black text-[#E5B842] border border-[#E5B842]/60 transition-colors flex items-center gap-1.5 text-[11px] font-medium"
+            >
+              <Sparkles className="w-3 h-3 text-[#E5B842]" />
+              <span>✨ V4 Editorial</span>
             </Link>
           </div>
         </div>

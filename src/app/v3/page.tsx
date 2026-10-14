@@ -241,12 +241,19 @@ export default function BrooklynPakistaniPage() {
               className="px-3 py-1 rounded-full bg-[#0B251B] hover:bg-[#12392B] text-emerald-300 hover:text-emerald-100 border border-emerald-700/60 transition-colors flex items-center gap-1.5 text-[11px] font-medium"
             >
               <Sparkles className="w-3 h-3 text-[#E5B842]" />
-              <span>👑 V2 Royal Atelier</span>
+              <span>👑 V2 Luxe</span>
             </Link>
             <span className="px-3 py-1 rounded-full bg-[#EA580C] text-white font-bold text-[11px] flex items-center gap-1 shadow-sm shadow-[#EA580C]/40">
               <Flame className="w-3 h-3" />
-              <span>🗽 V3 Brooklyn Soul (Active)</span>
+              <span>🗽 V3 Brooklyn (Active)</span>
             </span>
+            <Link
+              href="/v4"
+              className="px-3 py-1 rounded-full bg-stone-900 hover:bg-black text-[#C8A97E] border border-[#C8A97E]/60 transition-colors flex items-center gap-1.5 text-[11px] font-medium"
+            >
+              <Sparkles className="w-3 h-3 text-[#C8A97E]" />
+              <span>✨ V4 Editorial</span>
+            </Link>
           </div>
         </div>
       </div>

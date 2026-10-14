@@ -320,13 +320,13 @@ export default function LuxuryEditorialPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0C0B0A] text-[#F5F2EB] selection:bg-[#C8A97E] selection:text-[#0C0B0A] font-sans-clean antialiased">
+    <div className="min-h-screen bg-[#0C0B0A] text-[#F5F2EB] selection:bg-[#C8A97E] selection:text-[#0C0B0A] font-sans-clean antialiased w-full max-w-full overflow-x-hidden">
       
       {/* ── 1. MINIMAL THEME SWITCHER BAR ───────────────────────────── */}
-      <nav className="sticky top-0 z-40 bg-[#0C0B0A]/90 backdrop-blur-md border-b border-[#23211F] px-6 py-2.5 text-[11px] uppercase tracking-[0.2em]">
+      <nav className="sticky top-0 z-40 bg-[#0C0B0A]/90 backdrop-blur-md border-b border-[#23211F] px-4 sm:px-6 py-2.5 text-[11px] uppercase tracking-[0.2em] w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3 text-stone-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C8A97E] animate-pulse"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C8A97E] animate-pulse shrink-0"></span>
             <span className="text-stone-300 font-semibold tracking-widest">Atelier Presentation</span>
             <span className="text-stone-600">•</span>
             <span className="text-[#C8A97E] font-editorial italic text-sm tracking-normal normal-case">
@@ -334,7 +334,7 @@ export default function LuxuryEditorialPage() {
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap justify-center">
             <Link
               href="/"
               className="px-3 py-1 rounded text-stone-400 hover:text-white transition-colors"

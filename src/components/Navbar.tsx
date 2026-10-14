@@ -8,16 +8,16 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm transition-all">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm transition-all w-full max-w-full overflow-hidden">
       {/* Top micro banner */}
-      <div className="bg-amber-950 text-amber-100 text-xs py-1.5 px-4 border-b border-amber-900/50">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-1.5">
-          <div className="flex items-center gap-2 whitespace-nowrap overflow-x-auto max-w-full text-[11px] sm:text-xs">
+      <div className="bg-amber-950 text-amber-100 text-xs py-1.5 px-3 sm:px-4 border-b border-amber-900/50 w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-1.5 w-full">
+          <div className="flex items-center justify-center gap-2 text-center max-w-full text-[11px] sm:text-xs">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-            <span>✨ 100% Zabiha Halal • Limited to Brooklyn, NY • Max 50 Guests • Min. 1 Week Notice</span>
+            <span className="truncate sm:whitespace-normal">✨ 100% Zabiha Halal • Limited to Brooklyn, NY • Max 50 Guests</span>
           </div>
 
-          <div className="flex items-center gap-2 text-amber-200/90 flex-wrap justify-center shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-amber-200/90 flex-wrap justify-center shrink-0 max-w-full">
             <span className="text-[11px] text-amber-300/80 font-medium hidden sm:inline">Styles:</span>
             <Link
               href="/v2"
@@ -56,19 +56,19 @@ export default function Navbar() {
       </div>
 
       {/* Main navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 w-full">
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0 group">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 group-hover:from-amber-700 group-hover:to-amber-800 flex items-center justify-center text-white shadow-md shadow-amber-600/20 transition-all shrink-0">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 sm:flex-initial group">
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 group-hover:from-amber-700 group-hover:to-amber-800 flex items-center justify-center text-white shadow-md shadow-amber-600/20 transition-all shrink-0">
               <ChefHat className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
-            <div className="whitespace-nowrap">
-              <div className="text-lg sm:text-xl font-bold tracking-tight text-stone-900 group-hover:text-amber-700 transition-colors whitespace-nowrap">
-                UMBERS <span className="text-amber-600 font-serif italic font-normal text-base sm:text-lg">Food Catering Service</span>
+            <div className="min-w-0">
+              <div className="text-base sm:text-lg lg:text-xl font-bold tracking-tight text-stone-900 group-hover:text-amber-700 transition-colors truncate">
+                UMBERS <span className="text-amber-600 font-serif italic font-normal text-xs sm:text-base lg:text-lg"><span className="hidden sm:inline">Food </span>Catering<span className="hidden md:inline"> Service</span></span>
               </div>
-              <div className="text-[10px] sm:text-[11px] font-medium uppercase tracking-widest text-amber-800/80 flex items-center gap-1.5 whitespace-nowrap">
-                <span>Homestyle Family Cooking</span>
+              <div className="text-[9px] sm:text-[11px] font-medium uppercase tracking-wider text-amber-800/80 flex items-center gap-1 sm:gap-1.5 truncate">
+                <span><span className="hidden sm:inline">Homestyle </span>Family Cooking</span>
                 <span>•</span>
                 <span className="text-emerald-700 font-semibold">100% Halal</span>
               </div>
@@ -147,17 +147,17 @@ export default function Navbar() {
           </div>
 
           {/* Mobile hamburger */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <Link
               href="/order"
-              className="sm:hidden px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-bold"
+              className="sm:hidden px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-bold shrink-0 shadow-sm"
             >
               Book
             </Link>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              className="p-2 rounded-lg text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-colors"
+              className="p-1.5 sm:p-2 rounded-lg text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-colors shrink-0"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

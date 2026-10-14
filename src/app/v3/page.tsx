@@ -216,7 +216,7 @@ export default function BrooklynPakistaniPage() {
     : BROOKLYN_DISHES.filter(d => d.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-[#141210] text-[#F4EFEA] font-sans selection:bg-[#EA580C] selection:text-white">
+    <div className="min-h-screen bg-[#141210] text-[#F4EFEA] font-sans selection:bg-[#EA580C] selection:text-white w-full max-w-full overflow-x-hidden">
 
       {/* ── 1. STYLE SWITCHER TOP BAR ─────────────────────────────────── */}
       <div className="sticky top-0 z-50 bg-[#1A1715]/95 backdrop-blur-md border-b border-[#EA580C]/30 px-4 py-2 text-xs">

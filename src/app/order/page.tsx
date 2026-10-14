@@ -368,25 +368,25 @@ function OrderWizardContent() {
   });
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-50 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-10 overflow-x-hidden max-w-full">
         {/* Step Header Indicator */}
-        <div className="mb-10 text-center">
+        <div className="mb-8 sm:mb-10 text-center">
           <span className="text-amber-600 font-bold text-xs uppercase tracking-widest">
             Online Catering Concierge
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-1">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-stone-900 mt-1">
             Build Your Event Catering Order
           </h1>
-          <p className="text-stone-600 text-sm mt-2 max-w-xl mx-auto">
+          <p className="text-stone-600 text-xs sm:text-sm mt-2 max-w-xl mx-auto px-2">
             Instant itemized quote, transparent pricing, and direct kitchen reservation.
           </p>
 
           {/* Stepper tabs */}
-          <div className="mt-8 max-w-3xl mx-auto flex items-center justify-between relative">
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 bg-stone-200 w-full z-0"></div>
+          <div className="mt-6 sm:mt-8 max-w-3xl mx-auto flex items-center justify-between relative px-2">
+            <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-0.5 bg-stone-200 z-0"></div>
             {[
               { num: 1, label: 'Menu & Packages' },
               { num: 2, label: 'Date & Delivery' },
@@ -399,7 +399,7 @@ function OrderWizardContent() {
               return (
                 <div key={step.num} className="relative z-10 flex flex-col items-center">
                   <div
-                    className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
+                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center font-bold text-xs transition-all ${
                       isPast
                         ? 'bg-emerald-600 text-white'
                         : isCurrent
@@ -407,7 +407,7 @@ function OrderWizardContent() {
                         : 'bg-white border-2 border-stone-300 text-stone-500'
                     }`}
                   >
-                    {isPast ? <CheckCircle2 className="w-5 h-5" /> : step.num}
+                    {isPast ? <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5" /> : step.num}
                   </div>
                   <span
                     className={`text-[11px] font-semibold mt-2 hidden sm:block ${
@@ -432,7 +432,7 @@ function OrderWizardContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Wizard Form Body */}
-          <div className={`${currentStep === 1 ? 'lg:col-span-12' : 'lg:col-span-8'} bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm`}>
+          <div className={`${currentStep === 1 ? 'lg:col-span-12' : 'lg:col-span-8'} bg-white rounded-3xl p-4 sm:p-8 border border-stone-200 shadow-sm max-w-full overflow-hidden`}>
             
             {/* STEP 1: CHOOSE MENU & GUEST COUNT */}
             {currentStep === 1 && (
@@ -905,7 +905,7 @@ function OrderWizardContent() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-semibold text-stone-600 mb-1">Borough / City *</label>
                       <input

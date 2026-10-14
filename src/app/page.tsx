@@ -35,10 +35,10 @@ export default function HomePage() {
   const popularItems = MENU_ITEMS.filter(m => m.popular).slice(0, 6);
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-50 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         {/* Hero with interactive calculator */}
         <Hero />
 

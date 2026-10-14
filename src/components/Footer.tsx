@@ -4,7 +4,7 @@ import { ChefHat, Clock, MapPin, Mail, Phone, ShieldCheck, Heart, Sparkles } fro
 
 export default function Footer() {
   return (
-    <footer className="bg-stone-950 text-stone-300 pt-16 pb-12 border-t border-stone-850">
+    <footer className="bg-stone-950 text-stone-300 pt-16 pb-12 border-t border-stone-850 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-12 border-b border-stone-800">
           {/* Brand Info */}

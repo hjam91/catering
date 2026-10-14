@@ -55,7 +55,7 @@ export default function V2AtelierPage() {
     : MENU_ITEMS.filter(m => m.category === activeDishCategory).slice(0, 8);
 
   return (
-    <div className="min-h-screen bg-[#071913] text-[#F3EFE6] font-sans selection:bg-[#E5B842] selection:text-[#071913]">
+    <div className="min-h-screen bg-[#071913] text-[#F3EFE6] font-sans selection:bg-[#E5B842] selection:text-[#071913] w-full max-w-full overflow-x-hidden">
       
       {/* ── STYLE SWITCHER TOP BAR ────────────────────────────────────── */}
       <div className="sticky top-0 z-50 bg-[#040e0b]/95 backdrop-blur-md border-b border-[#E5B842]/30 px-4 py-2 text-xs">
@@ -128,16 +128,16 @@ export default function V2AtelierPage() {
           <div className="flex items-center justify-between h-24">
             
             {/* Brand Crest */}
-            <Link href="/v2" className="flex items-center gap-3.5 group">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#E5B842] to-[#B88A28] text-[#061812] flex items-center justify-center shadow-lg shadow-[#E5B842]/15 group-hover:scale-105 transition-transform">
-                <ChefHat className="w-7 h-7" />
+            <Link href="/v2" className="flex items-center gap-2.5 sm:gap-3.5 group min-w-0">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-[#E5B842] to-[#B88A28] text-[#061812] flex items-center justify-center shadow-lg shadow-[#E5B842]/15 group-hover:scale-105 transition-transform shrink-0">
+                <ChefHat className="w-5 h-5 sm:w-7 sm:h-7" />
               </div>
-              <div>
-                <div className="text-xl sm:text-2xl font-serif tracking-tight text-white group-hover:text-[#E5B842] transition-colors">
-                  UMBERS <span className="italic text-[#E5B842] font-light">Food Catering Service</span>
+              <div className="min-w-0">
+                <div className="text-lg sm:text-2xl font-serif tracking-tight text-white group-hover:text-[#E5B842] transition-colors truncate">
+                  UMBERS <span className="italic text-[#E5B842] font-light">Catering<span className="hidden sm:inline"> Service</span></span>
                 </div>
-                <div className="text-[10px] uppercase tracking-[0.25em] text-[#C4B290] font-sans">
-                  The Royal Daawat Atelier • Est. 2026
+                <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#C4B290] font-sans truncate">
+                  The Royal Daawat Atelier
                 </div>
               </div>
             </Link>

@@ -93,10 +93,10 @@ function OrderWizardContent() {
     instructions: '',
   });
 
-  // Step 2: Menu Selection State
+  // Step 1: Menu Selection State
   // Order mode: 'package' or 'custom'
   const [orderMode, setOrderMode] = useState<'package' | 'custom'>('package');
-  const [selectedPackageId, setSelectedPackageId] = useState<string>('pkg-classic-daawat');
+  const [selectedPackageId, setSelectedPackageId] = useState<string>('');
   const [selectedItems, setSelectedItems] = useState<Map<string, number>>(new Map());
   const [activeCategory, setActiveCategory] = useState<MenuCategory | 'all'>('all');
   const [dietaryFilter, setDietaryFilter] = useState<DietaryTag | 'all'>('all');
@@ -191,10 +191,10 @@ function OrderWizardContent() {
   });
 
   const subtotal = packageTotal + itemsSubtotal + addonsSubtotal;
-  const serviceFee = Math.round(subtotal * ((rules.serviceFeePercent || 10) / 100) * 100) / 100;
-  const deliveryFee = subtotal >= (rules.freeDeliveryThreshold || 500) ? 0 : (rules.flatDeliveryFee || 35);
-  const estimatedTax = Math.round((subtotal + serviceFee) * ((rules.taxRatePercent || 8.875) / 100) * 100) / 100;
-  const grandTotal = Math.round((subtotal + serviceFee + deliveryFee + estimatedTax) * 100) / 100;
+  const serviceFee = subtotal > 0 ? Math.round(subtotal * ((rules.serviceFeePercent || 10) / 100) * 100) / 100 : 0;
+  const deliveryFee = subtotal === 0 ? 0 : (subtotal >= (rules.freeDeliveryThreshold || 400) ? 0 : (rules.flatDeliveryFee || 35));
+  const estimatedTax = subtotal > 0 ? Math.round((subtotal + serviceFee) * ((rules.taxRatePercent || 8.875) / 100) * 100) / 100 : 0;
+  const grandTotal = subtotal > 0 ? Math.round((subtotal + serviceFee + deliveryFee + estimatedTax) * 100) / 100 : 0;
 
   // Item quantity controls
   const updateItemQty = (id: string, delta: number) => {
@@ -228,13 +228,14 @@ function OrderWizardContent() {
   // Step validation
   const validateStep = (step: number): boolean => {
     setErrorMessage('');
+    // Step 1: Validate Menu Selection
     if (step === 1) {
-      if (!eventDetails.date) {
-        setErrorMessage('Please select an event date.');
+      if (orderMode === 'package' && (!selectedPackage || !selectedPackageId)) {
+        setErrorMessage('Please select one of our curated packages, or switch to À la Carte Dishes to build your menu.');
         return false;
       }
-      if (eventDetails.date < minNoticeDate) {
-        setErrorMessage('We require at least 1 week (7 days) advance notice so Chef Umber can prepare fresh ingredients.');
+      if (orderMode === 'custom' && itemsList.length === 0) {
+        setErrorMessage('Please add at least one dish or tray to your order to proceed.');
         return false;
       }
       if (!eventDetails.guestCount || eventDetails.guestCount < 10) {
@@ -245,24 +246,25 @@ function OrderWizardContent() {
         setErrorMessage('Maximum guest count is 50 guests. We specialize in intimate and medium family gatherings to preserve handcrafted home-cooked quality.');
         return false;
       }
+    }
+    // Step 2: Validate Event & Delivery Logistics
+    if (step === 2) {
+      if (!eventDetails.date) {
+        setErrorMessage('Please select an event date.');
+        return false;
+      }
+      if (eventDetails.date < minNoticeDate) {
+        setErrorMessage('We require at least 1 week (7 days) advance notice so Chef Umber can prepare fresh ingredients.');
+        return false;
+      }
       if (!eventDetails.address.trim()) {
-        setErrorMessage('Please specify the delivery / venue address.');
+        setErrorMessage('Please specify the delivery / venue address in Brooklyn.');
         return false;
       }
       const cityLower = eventDetails.city.trim().toLowerCase();
       const addrLower = eventDetails.address.trim().toLowerCase();
       if (!cityLower.includes('brooklyn') && !addrLower.includes('brooklyn')) {
         setErrorMessage('Our catering service and delivery is exclusively limited to Brooklyn, NY.');
-        return false;
-      }
-    }
-    if (step === 2) {
-      if (orderMode === 'package' && !selectedPackage) {
-        setErrorMessage('Please select a catering package or switch to custom items.');
-        return false;
-      }
-      if (orderMode === 'custom' && itemsList.length === 0) {
-        setErrorMessage('Please add at least one menu item or tray to your order.');
         return false;
       }
     }
@@ -386,8 +388,8 @@ function OrderWizardContent() {
           <div className="mt-8 max-w-3xl mx-auto flex items-center justify-between relative">
             <div className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 bg-stone-200 w-full z-0"></div>
             {[
-              { num: 1, label: 'Event Details' },
-              { num: 2, label: 'Menu Selection' },
+              { num: 1, label: 'Menu & Packages' },
+              { num: 2, label: 'Date & Delivery' },
               { num: 3, label: 'Service Add-ons' },
               { num: 4, label: 'Contact & Notes' },
               { num: 5, label: 'Review & Confirm' },
@@ -432,65 +434,31 @@ function OrderWizardContent() {
           {/* Main Wizard Form Body */}
           <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm">
             
-            {/* STEP 1: EVENT DETAILS */}
+            {/* STEP 1: CHOOSE MENU & GUEST COUNT */}
             {currentStep === 1 && (
               <div className="space-y-6">
                 <div>
                   <h2 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-amber-600" />
-                    <span>Step 1: Event Essentials & Logistics</span>
+                    <Utensils className="w-5 h-5 text-amber-600" />
+                    <span>Step 1: Choose Your Feast & Guest Count</span>
                   </h2>
                   <p className="text-stone-500 text-xs mt-1">
-                    Provide the date, guest count, and venue so we can reserve kitchen staff and delivery slots.
+                    Select a chef-curated family feast package or build custom à la carte trays. Your live estimate calculates automatically.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700">
-                        Event Date (Min. 1 Week Notice) *
-                      </label>
-                      <span className="text-[10px] font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-300">
-                        Min. 7 Days Notice
-                      </span>
-                    </div>
-                    <input
-                      type="date"
-                      min={minNoticeDate}
-                      value={eventDetails.date}
-                      onChange={e => setEventDetails({ ...eventDetails, date: e.target.value })}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm font-medium text-stone-900 focus:outline-none focus:border-amber-600"
-                    />
-                    <p className="text-[11px] text-amber-800 mt-1.5 flex items-center gap-1 font-medium">
-                      <span>⏳ Minimum 1 week (7 days) notice required for kitchen prep.</span>
-                    </p>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                      Target Serving Time *
-                    </label>
-                    <input
-                      type="time"
-                      value={eventDetails.time}
-                      onChange={e => setEventDetails({ ...eventDetails, time: e.target.value })}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
-                    />
-                  </div>
-                </div>
-
-                {/* Guest Count */}
-                <div>
+                {/* Guest Count Selector (Determines package pricing & portions) */}
+                <div className="p-5 rounded-2xl bg-amber-50/50 border border-amber-200">
                   <div className="flex justify-between items-center mb-1.5">
-                    <label className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                      Estimated Guest Count (10 – 50 Guests Max) *
+                    <label className="text-xs font-bold uppercase tracking-wider text-stone-900 flex items-center gap-1.5">
+                      <Users className="w-4 h-4 text-amber-600" />
+                      <span>Estimated Guest Count (10 – 50 Guests Max) *</span>
                     </label>
-                    <span className="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                    <span className="text-xs font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-300">
                       {eventDetails.guestCount} Guests (Max 50)
                     </span>
                   </div>
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4 mt-2">
                     <input
                       type="range"
                       min="10"
@@ -506,7 +474,7 @@ function OrderWizardContent() {
                       max="50"
                       value={eventDetails.guestCount}
                       onChange={e => setEventDetails({ ...eventDetails, guestCount: Math.min(50, Math.max(1, Number(e.target.value))) })}
-                      className="w-24 bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-sm text-center font-bold text-stone-900"
+                      className="w-20 bg-white border border-stone-300 rounded-xl px-3 py-2 text-sm text-center font-bold text-stone-900"
                     />
                   </div>
                   <div className="flex items-center justify-between mt-1 text-[11px] text-stone-500">
@@ -515,15 +483,15 @@ function OrderWizardContent() {
                     <span>Max. 50 Guests</span>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-2.5">
-                    {[10, 15, 20, 25, 35, 45, 50].map(cnt => (
+                    {[10, 15, 20, 25, 30, 35, 40, 45, 50].map(cnt => (
                       <button
                         key={cnt}
                         type="button"
                         onClick={() => setEventDetails({ ...eventDetails, guestCount: cnt })}
                         className={`text-xs px-3 py-1 rounded-lg border font-semibold transition-all ${
                           eventDetails.guestCount === cnt
-                            ? 'bg-amber-600 text-white border-amber-600'
-                            : 'bg-stone-50 border-stone-200 text-stone-600 hover:border-amber-300'
+                            ? 'bg-amber-600 text-white border-amber-600 shadow-sm'
+                            : 'bg-white border-stone-200 text-stone-700 hover:border-amber-300'
                         }`}
                       >
                         {cnt} Guests
@@ -532,142 +500,18 @@ function OrderWizardContent() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {/* Mode switcher tabs */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                      Event Type
-                    </label>
-                    <select
-                      value={eventDetails.eventType}
-                      onChange={e => setEventDetails({ ...eventDetails, eventType: e.target.value })}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
-                    >
-                      <option value="Family Daawat & Dinner">Family Daawat & Dinner Gathering</option>
-                      <option value="Eid & Ramadan Celebration">Eid & Ramadan Celebration / Iftar</option>
-                      <option value="Wedding, Mehndi & Nikkah">Wedding, Mehndi & Nikkah Banquet</option>
-                      <option value="Birthday & Kids Party">Birthday & Kids / Youth Party</option>
-                      <option value="Sunday Desi Brunch">Sunday Desi Nashta & Family Brunch</option>
-                      <option value="Milad & Khatam Gathering">Ameen, Milad & Khatam Feast</option>
-                      <option value="Corporate & Community Event">Office Lunch & Community Gathering</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                      Service Style *
-                    </label>
-                    <select
-                      value={eventDetails.serviceStyle}
-                      onChange={e => setEventDetails({ ...eventDetails, serviceStyle: e.target.value as any })}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
-                    >
-                      <option value="setup_and_go">Setup & Go (Staff arranges steam trays & buffet, then departs)</option>
-                      <option value="drop_off">Drop-Off Delivery (Insulated containers ready to serve)</option>
-                      <option value="full_service">Full-Service (Friendly on-site serving staff & replenishment)</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Venue / Location Details */}
-                <div className="pt-2 border-t border-stone-100 space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-                      <MapPin className="w-4 h-4 text-amber-600" />
-                      <span>Venue & Delivery Location (Brooklyn, NY Only)</span>
+                    <h3 className="text-sm font-bold text-stone-900">
+                      Catering Format
                     </h3>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300">
-                      📍 Limited to Brooklyn
-                    </span>
-                  </div>
-
-                  <div className="p-3 bg-amber-50/70 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-center gap-2">
-                    <Info className="w-4 h-4 text-amber-700 shrink-0" />
-                    <span><strong>Service Area:</strong> Hot catering delivery & setup is exclusively limited to residences and venues within <strong>Brooklyn, NY</strong>.</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="sm:col-span-1">
-                      <label className="block text-xs font-semibold text-stone-600 mb-1">
-                        Venue / Building Name
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g. Home or Hall"
-                        value={eventDetails.venueName}
-                        onChange={e => setEventDetails({ ...eventDetails, venueName: e.target.value })}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-amber-600"
-                      />
-                    </div>
-                    <div className="sm:col-span-2">
-                      <label className="block text-xs font-semibold text-stone-600 mb-1">
-                        Street Address *
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="e.g. 125 Atlantic Ave"
-                        value={eventDetails.address}
-                        onChange={e => setEventDetails({ ...eventDetails, address: e.target.value })}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-amber-600"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-stone-600 mb-1">Borough / City *</label>
-                      <input
-                        type="text"
-                        value={eventDetails.city}
-                        onChange={e => setEventDetails({ ...eventDetails, city: e.target.value })}
-                        placeholder="Brooklyn"
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm font-medium text-stone-900"
-                      />
-                      <span className="text-[10px] text-amber-800 font-medium mt-0.5 block">Exclusively Brooklyn, NY</span>
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-stone-600 mb-1">Brooklyn ZIP Code *</label>
-                      <input
-                        type="text"
-                        placeholder="e.g. 11201"
-                        value={eventDetails.postalCode}
-                        onChange={e => setEventDetails({ ...eventDetails, postalCode: e.target.value })}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm font-medium text-stone-900"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-600 mb-1">
-                      Loading Dock / Delivery Instructions (Optional)
-                    </label>
-                    <textarea
-                      rows={2}
-                      placeholder="e.g. Access via freight elevator on Elm St. Call 10 mins prior."
-                      value={eventDetails.instructions}
-                      onChange={e => setEventDetails({ ...eventDetails, instructions: e.target.value })}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-600"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* STEP 2: MENU SELECTION */}
-            {currentStep === 2 && (
-              <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl font-bold text-stone-900 flex items-center gap-2">
-                      <Utensils className="w-5 h-5 text-amber-600" />
-                      <span>Step 2: Choose Menu Format</span>
-                    </h2>
-                    <p className="text-stone-500 text-xs mt-0.5">
-                      Select an all-inclusive chef package or pick custom trays and platters.
+                    <p className="text-stone-500 text-xs">
+                      Pick a complete chef package or order individual family trays.
                     </p>
                   </div>
 
-                  {/* Mode switcher tabs */}
-                  <div className="inline-flex rounded-xl bg-stone-100 p-1 border border-stone-200">
+                  <div className="inline-flex rounded-xl bg-stone-100 p-1 border border-stone-200 shrink-0">
                     <button
                       type="button"
                       onClick={() => setOrderMode('package')}
@@ -707,7 +551,7 @@ function OrderWizardContent() {
                             onClick={() => setSelectedPackageId(pkg.id)}
                             className={`cursor-pointer rounded-2xl border p-5 transition-all flex flex-col justify-between ${
                               isSelected
-                                ? 'border-amber-600 bg-amber-50/40 ring-2 ring-amber-600/20 shadow-md'
+                                ? 'border-amber-600 bg-amber-50/40 ring-2 ring-amber-600/30 shadow-md'
                                 : 'border-stone-200 hover:border-amber-300 bg-white'
                             }`}
                           >
@@ -726,9 +570,22 @@ function OrderWizardContent() {
                                 </div>
                               </div>
 
-                              <h3 className="font-bold text-stone-900 text-lg mb-1">
-                                {pkg.name}
-                              </h3>
+                              <div className="flex items-center justify-between mb-1">
+                                <h3 className="font-bold text-stone-900 text-lg">
+                                  {pkg.name}
+                                </h3>
+                                {isSelected ? (
+                                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full">
+                                    <CheckCircle2 className="w-3.5 h-3.5 text-amber-700" />
+                                    Selected
+                                  </span>
+                                ) : (
+                                  <span className="text-[11px] text-stone-400 font-medium group-hover:text-amber-600">
+                                    Click to select
+                                  </span>
+                                )}
+                              </div>
+
                               <p className="text-xs text-stone-600 mb-4 line-clamp-2">
                                 {pkg.description}
                               </p>
@@ -769,7 +626,7 @@ function OrderWizardContent() {
                     <div className="p-4 rounded-xl bg-stone-100 border border-stone-200 flex items-start gap-3 text-xs text-stone-600">
                       <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                       <div>
-                        Want to supplement your package with extra dessert platters, charcuterie boards, or craft lemonade? Switch to the <strong>À la Carte</strong> tab above to add individual trays!
+                        Want to supplement your package with extra dessert platters, charcuterie boards, or craft lemonade? Switch to the <strong>À la Carte Dishes</strong> tab above to add individual trays!
                       </div>
                     </div>
                   </div>
@@ -900,6 +757,191 @@ function OrderWizardContent() {
                     </div>
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* STEP 2: EVENT SCHEDULE & BROOKLYN DELIVERY */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-xl font-bold text-stone-900 flex items-center gap-2">
+                    <Calendar className="w-5 h-5 text-amber-600" />
+                    <span>Step 2: Date, Time & Brooklyn Delivery Logistics</span>
+                  </h2>
+                  <p className="text-stone-500 text-xs mt-1">
+                    Provide the date, target serving time, and venue so we can reserve kitchen staff and delivery slots.
+                  </p>
+                </div>
+
+                {/* Selected Menu Confirmation Pill */}
+                <div className="p-3 bg-amber-50/80 rounded-xl border border-amber-200 flex items-center justify-between text-xs text-amber-900">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>
+                      Menu selected for <strong>{eventDetails.guestCount} guests</strong>: {orderMode === 'package' && selectedPackage ? <strong>{selectedPackage.name}</strong> : <strong>{itemsList.length} custom dishes</strong>}.
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentStep(1)}
+                    className="text-amber-800 font-bold underline hover:text-amber-900 shrink-0 text-[11px]"
+                  >
+                    Edit Menu
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700">
+                        Event Date (Min. 1 Week Notice) *
+                      </label>
+                      <span className="text-[10px] font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-300">
+                        Min. 7 Days Notice
+                      </span>
+                    </div>
+                    <input
+                      type="date"
+                      min={minNoticeDate}
+                      value={eventDetails.date}
+                      onChange={e => setEventDetails({ ...eventDetails, date: e.target.value })}
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm font-medium text-stone-900 focus:outline-none focus:border-amber-600"
+                    />
+                    <p className="text-[11px] text-amber-800 mt-1.5 flex items-center gap-1 font-medium">
+                      <span>⏳ Minimum 1 week (7 days) notice required for fresh degh preparation.</span>
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      Target Serving Time *
+                    </label>
+                    <input
+                      type="time"
+                      value={eventDetails.time}
+                      onChange={e => setEventDetails({ ...eventDetails, time: e.target.value })}
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      Event Type
+                    </label>
+                    <select
+                      value={eventDetails.eventType}
+                      onChange={e => setEventDetails({ ...eventDetails, eventType: e.target.value })}
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
+                    >
+                      <option value="Family Daawat & Dinner">Family Daawat & Dinner Gathering</option>
+                      <option value="Eid & Ramadan Celebration">Eid & Ramadan Celebration / Iftar</option>
+                      <option value="Wedding, Mehndi & Nikkah">Wedding, Mehndi & Nikkah Banquet</option>
+                      <option value="Birthday & Kids Party">Birthday & Kids / Youth Party</option>
+                      <option value="Sunday Desi Brunch">Sunday Desi Nashta & Family Brunch</option>
+                      <option value="Milad & Khatam Gathering">Ameen, Milad & Khatam Feast</option>
+                      <option value="Corporate & Community Event">Office Lunch & Community Gathering</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      Service Style *
+                    </label>
+                    <select
+                      value={eventDetails.serviceStyle}
+                      onChange={e => setEventDetails({ ...eventDetails, serviceStyle: e.target.value as any })}
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
+                    >
+                      <option value="setup_and_go">Setup & Go (Staff arranges steam trays & buffet, then departs)</option>
+                      <option value="drop_off">Drop-Off Delivery (Insulated containers ready to serve)</option>
+                      <option value="full_service">Full-Service (Friendly on-site serving staff & replenishment)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Venue / Location Details */}
+                <div className="pt-2 border-t border-stone-100 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
+                      <MapPin className="w-4 h-4 text-amber-600" />
+                      <span>Venue & Delivery Location (Brooklyn, NY Only)</span>
+                    </h3>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300">
+                      📍 Limited to Brooklyn
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-amber-50/70 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-center gap-2">
+                    <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                    <span><strong>Service Area:</strong> Hot catering delivery & setup is exclusively limited to residences and venues within <strong>Brooklyn, NY</strong>.</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="sm:col-span-1">
+                      <label className="block text-xs font-semibold text-stone-600 mb-1">
+                        Venue / Building Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. Home or Hall"
+                        value={eventDetails.venueName}
+                        onChange={e => setEventDetails({ ...eventDetails, venueName: e.target.value })}
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-amber-600"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label className="block text-xs font-semibold text-stone-600 mb-1">
+                        Street Address *
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="e.g. 125 Atlantic Ave"
+                        value={eventDetails.address}
+                        onChange={e => setEventDetails({ ...eventDetails, address: e.target.value })}
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-amber-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold text-stone-600 mb-1">Borough / City *</label>
+                      <input
+                        type="text"
+                        value={eventDetails.city}
+                        onChange={e => setEventDetails({ ...eventDetails, city: e.target.value })}
+                        placeholder="Brooklyn"
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm font-medium text-stone-900"
+                      />
+                      <span className="text-[10px] text-amber-800 font-medium mt-0.5 block">Exclusively Brooklyn, NY</span>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-stone-600 mb-1">Brooklyn ZIP Code *</label>
+                      <input
+                        type="text"
+                        placeholder="e.g. 11201"
+                        value={eventDetails.postalCode}
+                        onChange={e => setEventDetails({ ...eventDetails, postalCode: e.target.value })}
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm font-medium text-stone-900"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-stone-600 mb-1">
+                      Loading Dock / Delivery Instructions (Optional)
+                    </label>
+                    <textarea
+                      rows={2}
+                      placeholder="e.g. Access via freight elevator on Elm St. Call 10 mins prior."
+                      value={eventDetails.instructions}
+                      onChange={e => setEventDetails({ ...eventDetails, instructions: e.target.value })}
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-600"
+                    />
+                  </div>
+                </div>
               </div>
             )}
 
@@ -1246,7 +1288,12 @@ function OrderWizardContent() {
                   className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-stone-300 text-stone-700 text-xs font-bold hover:bg-stone-50 transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
-                  <span>Previous Step</span>
+                  <span>
+                    {currentStep === 2 && 'Back to Menu Selection'}
+                    {currentStep === 3 && 'Back to Date & Delivery'}
+                    {currentStep === 4 && 'Back to Service Add-ons'}
+                    {currentStep === 5 && 'Back to Contact Info'}
+                  </span>
                 </button>
               ) : (
                 <div></div>
@@ -1258,7 +1305,12 @@ function OrderWizardContent() {
                   onClick={handleNext}
                   className="flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-md shadow-amber-600/20 transition-all"
                 >
-                  <span>Continue to Step {currentStep + 1}</span>
+                  <span>
+                    {currentStep === 1 && 'Continue to Step 2: Date & Delivery'}
+                    {currentStep === 2 && 'Continue to Step 3: Service Add-ons'}
+                    {currentStep === 3 && 'Continue to Step 4: Contact & Notes'}
+                    {currentStep === 4 && 'Continue to Step 5: Review & Confirm'}
+                  </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               ) : (
@@ -1295,48 +1347,84 @@ function OrderWizardContent() {
               </h3>
 
               <div className="space-y-3 text-xs">
-                {/* Date preview */}
-                <div className="flex justify-between text-stone-600">
-                  <span>Event Date:</span>
-                  <span className="font-semibold text-stone-900">
-                    {eventDetails.date || 'Not set'}
-                  </span>
-                </div>
+                {/* Menu & Logistics status preview */}
+                <div className="pb-3 border-b border-stone-100 space-y-2">
+                  <div className="flex justify-between items-start text-stone-600">
+                    <span className="text-stone-500 font-medium">Selected Menu:</span>
+                    {orderMode === 'package' && selectedPackage ? (
+                      <div className="text-right">
+                        <span className="font-bold text-stone-900 block max-w-[170px] truncate">
+                          {selectedPackage.name}
+                        </span>
+                        <span className="text-[11px] text-amber-700 font-semibold">
+                          ${selectedPackage.pricePerPerson}/guest × {eventDetails.guestCount}
+                        </span>
+                      </div>
+                    ) : orderMode === 'custom' && itemsList.length > 0 ? (
+                      <div className="text-right">
+                        <span className="font-bold text-stone-900 block">
+                          {itemsList.length} À la carte dish{itemsList.length > 1 ? 'es' : ''}
+                        </span>
+                        <span className="text-[11px] text-stone-500">
+                          Custom selection
+                        </span>
+                      </div>
+                    ) : (
+                      <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                        None selected yet
+                      </span>
+                    )}
+                  </div>
 
-                <div className="flex justify-between text-stone-600">
-                  <span>Service:</span>
-                  <span className="font-semibold text-stone-900 capitalize">
-                    {eventDetails.serviceStyle.replace(/_/g, ' ')}
-                  </span>
-                </div>
+                  {eventDetails.date && (
+                    <div className="flex justify-between text-stone-600">
+                      <span className="text-stone-500 font-medium">Event Date:</span>
+                      <span className="font-semibold text-stone-900">
+                        {eventDetails.date}
+                      </span>
+                    </div>
+                  )}
 
-                <div className="pt-3 border-t border-stone-100 space-y-2">
                   <div className="flex justify-between text-stone-600">
-                    <span>Menu / Package Subtotal:</span>
+                    <span className="text-stone-500 font-medium">Service Style:</span>
+                    <span className="font-semibold text-stone-900 capitalize">
+                      {eventDetails.serviceStyle.replace(/_/g, ' ')}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Subtotals & Fees */}
+                <div className="space-y-2">
+                  <div className="flex justify-between text-stone-600">
+                    <span>Menu / Food Subtotal:</span>
                     <span className="font-semibold text-stone-900">
                       ${(packageTotal + itemsSubtotal).toLocaleString()}
                     </span>
                   </div>
 
-                  <div className="flex justify-between text-stone-600">
-                    <span>Add-ons & Equipment:</span>
-                    <span className="font-semibold text-stone-900">
-                      ${addonsSubtotal.toLocaleString()}
-                    </span>
-                  </div>
+                  {addonsSubtotal > 0 && (
+                    <div className="flex justify-between text-stone-600">
+                      <span>Add-ons & Equipment:</span>
+                      <span className="font-semibold text-stone-900">
+                        ${addonsSubtotal.toLocaleString()}
+                      </span>
+                    </div>
+                  )}
 
                   <div className="flex justify-between text-stone-600">
-                    <span>Kitchen & Service Fee (10%):</span>
+                    <span>Kitchen Fee ({rules.serviceFeePercent || 10}%):</span>
                     <span className="font-semibold text-stone-900">
                       ${serviceFee.toLocaleString()}
                     </span>
                   </div>
 
                   <div className="flex justify-between text-stone-600">
-                    <span>Delivery & Setup:</span>
+                    <span>Delivery & Setup (Brooklyn):</span>
                     <span className="font-semibold text-stone-900">
-                      {deliveryFee === 0 ? (
-                        <span className="text-emerald-600 font-bold">FREE ($300+)</span>
+                      {subtotal === 0 ? (
+                        <span className="text-stone-400">Calculated on food</span>
+                      ) : deliveryFee === 0 ? (
+                        <span className="text-emerald-600 font-bold">FREE (${rules.freeDeliveryThreshold || 400}+)</span>
                       ) : (
                         `$${deliveryFee}`
                       )}
@@ -1344,7 +1432,7 @@ function OrderWizardContent() {
                   </div>
 
                   <div className="flex justify-between text-stone-600">
-                    <span>Estimated Sales Tax:</span>
+                    <span>Estimated Sales Tax ({rules.taxRatePercent || 8.875}%):</span>
                     <span className="font-semibold text-stone-900">
                       ${estimatedTax.toLocaleString()}
                     </span>
@@ -1357,14 +1445,23 @@ function OrderWizardContent() {
                     <span className="text-xs uppercase tracking-wider font-bold text-stone-700 block">
                       Estimated Total
                     </span>
-                    <span className="text-[11px] text-stone-400">
-                      ~${(grandTotal / (eventDetails.guestCount || 1)).toFixed(2)} / guest
-                    </span>
+                    {subtotal > 0 && (
+                      <span className="text-[11px] text-stone-400">
+                        ~${(grandTotal / (eventDetails.guestCount || 1)).toFixed(2)} / guest
+                      </span>
+                    )}
                   </div>
                   <span className="text-2xl font-black text-amber-700">
                     ${grandTotal.toLocaleString()}
                   </span>
                 </div>
+
+                {subtotal === 0 && (
+                  <div className="mt-3 p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
+                    <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                    <span>Please choose a curated package or add dishes from the menu to calculate your live catering pricing.</span>
+                  </div>
+                )}
               </div>
 
               {/* Guarantees */}

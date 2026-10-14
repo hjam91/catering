@@ -1,51 +1,5 @@
 [
   {
-    "eventDetails": {
-      "date": "2026-11-20",
-      "time": "13:00",
-      "guestCount": 50,
-      "eventType": "Tech Product Launch",
-      "serviceStyle": "setup_and_go",
-      "venueName": "Skyline Loft",
-      "address": "120 Broadway",
-      "city": "Metropolis",
-      "postalCode": "10005"
-    },
-    "selectedPackage": {
-      "packageId": "pkg-artisan-cocktail",
-      "name": "Artisan Cocktail Reception",
-      "pricePerPerson": 42,
-      "guestCount": 50,
-      "total": 2100
-    },
-    "selectedItems": [],
-    "addons": [
-      {
-        "addonId": "addon-bartender",
-        "name": "TIPS-Certified Mixologist / Bartender",
-        "quantity": 1,
-        "unitPrice": 55,
-        "total": 220
-      }
-    ],
-    "customer": {
-      "fullName": "Alexander Vance",
-      "email": "alex@skylineinnovations.com",
-      "phone": "(555) 444-9988",
-      "company": "Skyline Innovations"
-    },
-    "pricing": {
-      "subtotal": 2320,
-      "serviceFee": 232,
-      "estimatedTax": 226.5,
-      "deliveryFee": 0,
-      "total": 2778.5
-    },
-    "id": "CAT-3782",
-    "createdAt": "2026-10-14T01:10:40.755Z",
-    "status": "confirmed"
-  },
-  {
     "id": "CAT-8105",
     "createdAt": "2026-10-13T19:10:29.662Z",
     "status": "in_preparation",
@@ -53,185 +7,221 @@
       "date": "2026-10-15",
       "time": "18:30",
       "guestCount": 60,
-      "eventType": "Wedding Rehearsal Dinner",
+      "eventType": "Eid Family Banquet",
       "serviceStyle": "setup_and_go",
-      "venueName": "The Glasshouse Pavilion",
-      "address": "450 Harbor Boulevard, Suite 300",
+      "venueName": "Community Banquet Hall",
+      "address": "450 Crescent Boulevard, Hall B",
       "city": "Metropolis",
       "postalCode": "10004",
-      "instructions": "Deliver via the service elevator around back. Contact venue coordinator Marcus on arrival."
+      "instructions": "Deliver to side banquet entrance. Set up stainless warming chafers and sweet zarda display."
     },
     "selectedPackage": {
       "packageId": "pkg-grand-celebration",
-      "name": "Grand Celebration Buffet",
-      "pricePerPerson": 58,
+      "name": "The Royal Celebration Banquet",
+      "pricePerPerson": 32,
       "guestCount": 60,
-      "total": 3480
+      "total": 1920
     },
     "selectedItems": [
       {
-        "menuItemId": "item-charcuterie-board",
-        "name": "Grand Artisan Charcuterie & Fromage Board",
+        "menuItemId": "item-paratha-rolls-platter",
+        "name": "Chicken Tikka Paratha Rolls & Sliders Platter",
         "category": "platters",
         "quantity": 2,
-        "unitPrice": 160,
+        "unitPrice": 80,
         "pricingType": "per_tray",
-        "total": 320
+        "total": 160
       },
       {
-        "menuItemId": "item-citrus-lemonade",
-        "name": "Lavender Rosemary Craft Lemonade Urn",
+        "menuItemId": "item-desi-lassi",
+        "name": "Chilled Sweet / Salty Desi Lassi Pitchers",
         "category": "beverages",
         "quantity": 2,
-        "unitPrice": 45,
+        "unitPrice": 25,
         "pricingType": "per_tray",
-        "total": 90
+        "total": 50
       }
     ],
     "addons": [
       {
         "addonId": "addon-chafers",
-        "name": "Stainless Chafing Dishes & Sterno Fuel Kit",
+        "name": "Stainless Chafing Dishes & Sterno Warmers Kit",
         "quantity": 4,
-        "unitPrice": 25,
-        "total": 100
-      },
-      {
-        "addonId": "addon-floral-styling",
-        "name": "Artisan Buffet Styling & Botanical Decor",
-        "quantity": 1,
-        "unitPrice": 150,
-        "total": 150
+        "unitPrice": 20,
+        "total": 80
       }
     ],
     "customer": {
-      "fullName": "Elena Rostova",
-      "email": "elena.rostova@example.com",
-      "phone": "(555) 234-8901",
-      "company": "Private Host",
-      "specialRequests": "Please label all vegetarian options with signage.",
-      "dietaryNotes": "5 guests have severe celiac gluten allergies, 2 guests are vegan."
+      "fullName": "Aisha & Bilal Khan",
+      "email": "aisha.khan@example.com",
+      "phone": "(555) 321-7788",
+      "specialRequests": "Please keep biryani traditional medium spice. Extra mint chutney on the side."
     },
     "pricing": {
-      "subtotal": 4140,
-      "serviceFee": 414,
-      "estimatedTax": 372.6,
-      "deliveryFee": 75,
-      "total": 5001.6
+      "subtotal": 2210,
+      "serviceFee": 221,
+      "estimatedTax": 193.38,
+      "deliveryFee": 0,
+      "total": 2624.38
     }
   },
   {
     "id": "CAT-8104",
-    "createdAt": "2026-10-12T21:10:29.663Z",
+    "createdAt": "2026-10-12T14:22:15.102Z",
     "status": "confirmed",
     "eventDetails": {
-      "date": "2026-10-17",
-      "time": "12:00",
+      "date": "2026-10-18",
+      "time": "11:30",
       "guestCount": 35,
-      "eventType": "Corporate All-Hands Summit",
-      "serviceStyle": "drop_off",
-      "venueName": "Nexus Tech HQ - 14th Floor Boardroom",
-      "address": "100 Innovation Way",
+      "eventType": "Sunday Desi Brunch & Nashta",
+      "serviceStyle": "setup_and_go",
+      "venueName": "Malik Family Residence",
+      "address": "72 Meadow Lane",
       "city": "Metropolis",
-      "postalCode": "10001",
-      "instructions": "Check in with security at building lobby. Badges will be waiting for driver."
+      "postalCode": "10012",
+      "instructions": "Deliver hot fresh parathas and chai urn right before guests arrive at 11:30 AM."
     },
     "selectedPackage": {
-      "packageId": "pkg-executive-lunch",
-      "name": "The Executive Luncheon",
-      "pricePerPerson": 28,
+      "packageId": "pkg-desi-brunch",
+      "name": "Weekend Desi Nashta & Brunch",
+      "pricePerPerson": 19,
       "guestCount": 35,
-      "total": 980
+      "total": 665
     },
     "selectedItems": [
       {
-        "menuItemId": "item-coffee-service",
-        "name": "Artisan Roast Coffee & Tea Station",
+        "menuItemId": "item-karak-chai",
+        "name": "Fresh Brewed Cardamom Karak Chai Station",
         "category": "beverages",
-        "quantity": 2,
-        "unitPrice": 65,
+        "quantity": 1,
+        "unitPrice": 45,
         "pricingType": "per_tray",
-        "total": 130
+        "total": 45
       }
     ],
     "addons": [
       {
-        "addonId": "addon-dinnerware",
-        "name": "Premium Eco-Bamboo Plates & Cutlery Set",
-        "quantity": 35,
-        "unitPrice": 3.5,
-        "total": 122.5
+        "addonId": "addon-chai-service",
+        "name": "Live Karak Chai Urn Setup & Clay Cups",
+        "quantity": 1,
+        "unitPrice": 40,
+        "total": 40
       }
     ],
     "customer": {
-      "fullName": "David Sterling",
-      "email": "d.sterling@nexustech.io",
-      "phone": "(555) 876-5432",
-      "company": "Nexus Technologies",
-      "specialRequests": "Need warm coffee set up by 11:45 AM before CEO address.",
-      "dietaryNotes": "3 Halal meals requested, 4 Dairy-Free."
+      "fullName": "Tariq Malik",
+      "email": "tariq.malik@example.com",
+      "phone": "(555) 789-2345",
+      "specialRequests": "We have 8 kids attending so mild spice on the anda chana please."
     },
     "pricing": {
-      "subtotal": 1232.5,
-      "serviceFee": 123.25,
-      "estimatedTax": 110.92,
-      "deliveryFee": 50,
-      "total": 1516.67
+      "subtotal": 750,
+      "serviceFee": 75,
+      "estimatedTax": 65.63,
+      "deliveryFee": 0,
+      "total": 890.63
     }
   },
   {
     "id": "CAT-8092",
-    "createdAt": "2026-10-09T01:10:29.663Z",
+    "createdAt": "2026-10-10T11:05:00.000Z",
     "status": "completed",
     "eventDetails": {
       "date": "2026-10-12",
-      "time": "19:00",
-      "guestCount": 40,
-      "eventType": "Art Gallery Opening",
-      "serviceStyle": "full_service",
-      "venueName": "Aura Modern Contemporary Gallery",
-      "address": "77 Mercer Street",
+      "time": "17:00",
+      "guestCount": 25,
+      "eventType": "Family Daawat & Dinner",
+      "serviceStyle": "drop_off",
+      "venueName": "Private Residence",
+      "address": "184 Parkview Terrace",
       "city": "Metropolis",
-      "postalCode": "10012",
-      "instructions": "Staff arrived via loading dock at 5:00 PM."
+      "postalCode": "10025"
     },
     "selectedPackage": {
-      "packageId": "pkg-artisan-cocktail",
-      "name": "Artisan Cocktail Reception",
-      "pricePerPerson": 42,
-      "guestCount": 40,
-      "total": 1680
+      "packageId": "pkg-classic-daawat",
+      "name": "The Classic Family Daawat",
+      "pricePerPerson": 22,
+      "guestCount": 25,
+      "total": 550
     },
-    "selectedItems": [],
+    "selectedItems": [
+      {
+        "menuItemId": "item-pakoras",
+        "name": "Crispy Golden Homestyle Pakoras",
+        "category": "appetizers",
+        "quantity": 1,
+        "unitPrice": 45,
+        "pricingType": "per_tray",
+        "total": 45
+      }
+    ],
+    "addons": [],
+    "customer": {
+      "fullName": "Farida Rehman",
+      "email": "farida.r@example.com",
+      "phone": "(555) 902-1144"
+    },
+    "pricing": {
+      "subtotal": 595,
+      "serviceFee": 59.5,
+      "estimatedTax": 52.06,
+      "deliveryFee": 0,
+      "total": 706.56
+    }
+  },
+  {
+    "id": "CAT-3782",
+    "createdAt": "2026-10-14T01:10:40.755Z",
+    "status": "confirmed",
+    "eventDetails": {
+      "date": "2026-10-20",
+      "time": "13:00",
+      "guestCount": 40,
+      "eventType": "Quran Ameen & Family Feast",
+      "serviceStyle": "setup_and_go",
+      "venueName": "Al-Noor Community Center",
+      "address": "120 Broadway",
+      "city": "Metropolis",
+      "postalCode": "10005"
+    },
+    "selectedPackage": {
+      "packageId": "pkg-classic-daawat",
+      "name": "The Classic Family Daawat",
+      "pricePerPerson": 22,
+      "guestCount": 40,
+      "total": 880
+    },
+    "selectedItems": [
+      {
+        "menuItemId": "item-badami-kheer",
+        "name": "Royal Badami Kheer (Almond Rice Pudding)",
+        "category": "desserts",
+        "quantity": 1,
+        "unitPrice": 50,
+        "pricingType": "per_tray",
+        "total": 50
+      }
+    ],
     "addons": [
       {
-        "addonId": "addon-bartender",
-        "name": "TIPS-Certified Mixologist / Bartender",
+        "addonId": "addon-chafers",
+        "name": "Stainless Chafing Dishes & Sterno Warmers Kit",
         "quantity": 2,
-        "unitPrice": 55,
-        "total": 440
-      },
-      {
-        "addonId": "addon-server",
-        "name": "Professional Uniformed Service Staff",
-        "quantity": 2,
-        "unitPrice": 45,
-        "total": 360
+        "unitPrice": 20,
+        "total": 40
       }
     ],
     "customer": {
-      "fullName": "Chloe Vance",
-      "email": "chloe@auragallery.art",
-      "phone": "(555) 345-6789",
-      "company": "Aura Gallery",
-      "specialRequests": "Great presentation. Event was a hit!"
+      "fullName": "Zainab Rasheed",
+      "email": "zainab.rasheed@example.com",
+      "phone": "(555) 444-9988"
     },
     "pricing": {
-      "subtotal": 2480,
-      "serviceFee": 248,
-      "estimatedTax": 223.2,
-      "deliveryFee": 100,
-      "total": 3051.2
+      "subtotal": 970,
+      "serviceFee": 97,
+      "estimatedTax": 84.88,
+      "deliveryFee": 0,
+      "total": 1151.88
     }
   }
 ]

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Savor & Sage | Artisanal Catering & Event Culinary Services",
-  description: "Exquisite catering for corporate events, weddings, and private gatherings. Fresh ingredients, custom menus, and seamless online ordering.",
+  title: "Umbers Catering House | Homestyle Family Catering & Authentic Daawat Feasts",
+  description: "Authentic, freshly home-cooked family-style catering. Generous trays of Biryani, Chicken Karahi, Shami Kebabs, Nargisi Koftay, Fresh Parathas, and Royal Badami Kheer. 100% Zabiha Halal.",
 };
 
 export default function RootLayout({
@@ -19,4 +19,3 @@ export default function RootLayout({
     </html>
   );
 }
-

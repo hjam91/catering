@@ -1,28 +1,28 @@
 import React from 'react';
-import { Star, Quote } from 'lucide-react';
+import { Star, Quote, Heart } from 'lucide-react';
 
 const REVIEWS = [
   {
-    name: 'Sarah Jenkins',
-    role: 'VP of People, Elevate Cloud',
-    event: 'Quarterly Executive Summit (85 Guests)',
-    content: 'The Executive Luncheon spread was beyond spectacular. Not a single sandwich triangle was left! The online ordering process was so easy and the delivery team arrived exactly 20 minutes before our scheduled lunch break.',
+    name: 'Aisha & Bilal Khan',
+    role: 'Family Hosts',
+    event: 'Eid Family Daawat (65 Guests)',
+    content: 'Every single guest asked who cooked this! Chef Umber\'s Dum Biryani was so aromatic and tender, and the Nargisi Koftay were absolute perfection. The trays arrived boiling hot and there were even generous portions left for everyone to take home.',
+    rating: 5,
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80'
+  },
+  {
+    name: 'Farah & Tariq Malik',
+    role: 'Parents & Hosts',
+    event: 'Daughter\'s Quran Ameen & Sunday Brunch (40 Guests)',
+    content: 'The flaky tawa parathas, bhuna qeema, and sarson ka saag tasted just like my mother\'s cooking in Lahore. The Badami Kheer in the Pyrex dish was gone in five minutes! Umbers Catering House made our special morning unforgettable.',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80'
   },
   {
-    name: 'Marcus & Liam Thorne',
-    role: 'Wedding Clients',
-    event: 'Glasshouse Pavilion Wedding (140 Guests)',
-    content: 'Our wedding guests are still raving about the beef short ribs and the wild salmon beurre blanc. Savor & Sage accommodated our gluten-free and vegan family members with exquisite dedicated courses.',
-    rating: 5,
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80'
-  },
-  {
-    name: 'Harrison Sterling',
-    role: 'Managing Partner, Sterling & Cole Capital',
-    event: 'Annual Investor Dinner (50 Guests)',
-    content: 'Top-tier culinary quality and white-glove service. The bartenders and service staff were attentive, polished, and left the venue kitchen immaculate. They are now our exclusive catering partner.',
+    name: 'Omar & Sana Siddiqui',
+    role: 'Event Hosts',
+    event: 'Mehndi & Pre-Wedding Banquet (90 Guests)',
+    content: 'From the chicken tikka skewers to the sizzling tawa roast and dahi bhallay, everything was 10/10. 100% Zabiha Halal, spotless presentation, and genuine family hospitality. We will never host another event without Umber!',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80'
   }
@@ -33,14 +33,15 @@ export default function TestimonialSection() {
     <section className="py-20 bg-stone-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-amber-400 font-semibold text-xs uppercase tracking-widest">
-            Trusted by Event Hosts
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">
-            Client Experiences & Stories
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-xs font-semibold mb-3 border border-amber-500/30">
+            <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400" />
+            <span>Loved by Families Across the Community</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mt-1 tracking-tight">
+            Family Stories & Real Reviews
           </h2>
           <p className="text-stone-400 text-sm mt-3">
-            Read what corporate planners and hosts say about our food quality and seamless delivery.
+            Read what host families and event organizers say about Chef Umber's home-cooked food and warm hospitality.
           </p>
         </div>
 
@@ -48,9 +49,9 @@ export default function TestimonialSection() {
           {REVIEWS.map((rev, idx) => (
             <div
               key={idx}
-              className="bg-stone-800/80 border border-stone-700/70 rounded-3xl p-7 flex flex-col justify-between relative hover:border-amber-500/50 transition-colors"
+              className="bg-stone-850 border border-stone-800 rounded-3xl p-7 flex flex-col justify-between relative hover:border-amber-500/50 transition-colors shadow-lg"
             >
-              <Quote className="w-8 h-8 text-amber-500/30 absolute top-6 right-6" />
+              <Quote className="w-8 h-8 text-amber-500/20 absolute top-6 right-6" />
               <div>
                 <div className="flex gap-1 text-amber-400 mb-4">
                   {[...Array(rev.rating)].map((_, i) => (
@@ -62,7 +63,7 @@ export default function TestimonialSection() {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-stone-700/60 flex items-center gap-3">
+              <div className="pt-4 border-t border-stone-800 flex items-center gap-3">
                 <img
                   src={rev.avatar}
                   alt={rev.name}

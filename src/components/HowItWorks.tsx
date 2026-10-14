@@ -1,46 +1,46 @@
 import React from 'react';
-import { CalendarCheck2, ChefHat, Truck, Sparkles } from 'lucide-react';
+import { CalendarCheck2, ChefHat, Truck, Sparkles, HeartHandshake, Utensils } from 'lucide-react';
 
 const STEPS = [
   {
     step: '01',
     icon: CalendarCheck2,
-    title: 'Select Date & Guest Count',
-    description: 'Choose your event details, location, and guest count. Our smart system calculates recommended tray sizes and food volumes.',
+    title: 'Pick Occasion & Headcount',
+    description: 'Whether it is a cozy 10-person family dinner, a weekend brunch, or a 150-guest wedding banquet, select your date and guest count.',
   },
   {
     step: '02',
     icon: Sparkles,
-    title: 'Customize Menu & Service',
-    description: 'Select an all-inclusive culinary package or handpick gourmet items à la carte. Add servers, bartenders, or warming equipment as needed.',
+    title: 'Choose Packages or À La Carte Trays',
+    description: 'Pick an all-inclusive daawat package with biryani, karahi & kheer, or handpick your favorite half and full catering trays.',
   },
   {
     step: '03',
     icon: ChefHat,
-    title: 'Chef-Crafted Fresh',
-    description: 'Our executive culinary team sources locally and prepares your dishes hours before delivery in temperature-controlled transport units.',
+    title: 'Chef Umber Cooks Fresh From Scratch',
+    description: 'Every meal is prepared with 100% Zabiha Halal meats, pure spices, and traditional recipes just hours before delivery.',
   },
   {
     step: '04',
     icon: Truck,
-    title: 'White-Glove Setup & Delivery',
-    description: 'We arrive on time, unpack, light chafers, and arrange your buffet with labeled allergen signage so you can simply enjoy your guests.',
+    title: 'Piping Hot Delivery To Your Table',
+    description: 'Your food arrives steaming hot in insulated containers or aluminum steam pans ready to serve immediately onto your table or dastarkhwan.',
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-20 bg-stone-100/70 border-y border-stone-200">
+    <section id="how-it-works" className="py-20 bg-stone-50 border-y border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-amber-600 font-semibold text-xs uppercase tracking-widest">
-            Stress-Free Hospitality
+          <span className="text-amber-700 font-semibold text-xs uppercase tracking-widest">
+            Stress-Free Family Hospitality
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-2 tracking-tight">
-            How Our Catering Works
+            How Umbers Catering House Works
           </h2>
           <p className="text-stone-600 text-sm sm:text-base mt-3">
-            From the first click to the final plate cleared, we streamline every detail of your event catering.
+            Spend time with your loved ones and let Chef Umber take care of the cooking. Here is how easy it is to host an authentic feast.
           </p>
         </div>
 
@@ -50,13 +50,13 @@ export default function HowItWorks() {
             return (
               <div
                 key={index}
-                className="relative bg-white rounded-2xl p-7 border border-stone-200 shadow-sm hover:shadow-md transition-shadow"
+                className="relative bg-white rounded-3xl p-7 border border-stone-200/90 shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600">
+                  <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <span className="text-3xl font-black text-stone-200 font-mono">
+                  <span className="text-3xl font-black text-amber-100 font-mono">
                     {item.step}
                   </span>
                 </div>

@@ -2,22 +2,23 @@ import { MenuItem, CateringPackage, ServiceAddon } from '../types/catering';
 
 export const CATERING_PACKAGES: CateringPackage[] = [
   {
-    id: 'pkg-executive-lunch',
-    name: 'The Executive Luncheon',
-    tagline: 'Ideal for board meetings, seminars, and corporate offices',
-    description: 'A polished, energizing spread featuring artisan sandwiches, hearty grain bowls, farm salad, and handcrafted dessert bites.',
-    pricePerPerson: 28,
+    id: 'pkg-classic-daawat',
+    name: 'The Classic Family Daawat',
+    tagline: 'Hearty, comforting homestyle feast beloved by every family',
+    description: 'Our most requested home-catering feast! Generous family-style trays featuring fragrant Chicken Dum Biryani, tender Chicken Karahi, melt-in-mouth Shami Kebabs, cool Dahi Bhallay, warm tandoori naan, and rich Badami Kheer.',
+    pricePerPerson: 22,
     minGuests: 10,
-    suggestedFor: 'Corporate Meetings & Daytime Seminars',
-    image: 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80',
-    badge: 'Most Popular for Business',
+    suggestedFor: 'Family Daawats, Weekend Dinners & Housewarmings',
+    image: '/images/real/IMG-20261013-WA0168.jpg',
+    badge: 'Most Popular Family Feast',
     inclusions: [
-      'Artisan Gourmet Wraps & Panini Platter (Turkey Cranberry, Caprese, Roast Beef)',
-      'Mediterranean Quinoa & Feta Salad with Lemon Vinaigrette',
-      'Fresh Roasted Vegetable Platter with Herb Aioli',
-      'Assorted Sea Salt Brownie & Blondie Bites',
-      'Infused Citrus Water & Sparkling Mineral Water',
-      'Includes compostable plates, napkins & cutlery'
+      'Fragrant Chicken Dum Biryani with spiced chicken & golden basmati rice',
+      'Tender Homestyle Chicken Karahi garnished with ginger juliennes & green chilies',
+      'Handcrafted Beef or Chicken Shami Kebabs (2 per guest) with mint chutney',
+      'Creamy Dahi Bhallay with tamarind glaze & fresh crisp Kachumber salad',
+      'Warm Tandoori Naan & Fresh Roti basket',
+      'Homestyle Royal Badami Kheer garnished with crushed roasted almonds',
+      'Includes serving spoons, tongs, and heavy-duty family dinnerware'
     ],
     coursesCount: {
       appetizers: 1,
@@ -27,411 +28,483 @@ export const CATERING_PACKAGES: CateringPackage[] = [
     }
   },
   {
-    id: 'pkg-artisan-cocktail',
-    name: 'Artisan Cocktail Reception',
-    tagline: 'Chic passed & stationed hors d\'oeuvres for evening celebrations',
-    description: 'Elevate your mixer, art opening, or evening party with an array of visually stunning and savory bite-sized masterpieces.',
-    pricePerPerson: 42,
+    id: 'pkg-grand-celebration',
+    name: 'The Royal Celebration Banquet',
+    tagline: 'Lavish traditional spread for weddings, Eid, Aqiqah & milestones',
+    description: 'A grand celebration feast crafted for big family gatherings. Featuring slow-simmered Mutton Korma, Chicken Biryani, iconic Nargisi Koftay with egg halves, Tawa Chicken Roast, and dual traditional sweets.',
+    pricePerPerson: 32,
     minGuests: 20,
-    suggestedFor: 'Cocktail Mixers, Brand Launches & Anniversaries',
-    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80',
-    badge: 'Party Favorite',
+    suggestedFor: 'Weddings, Nikkah, Mehndi, Eid Gatherings & Aqiqah',
+    image: '/images/real/IMG-20261013-WA0088.jpg',
+    badge: 'Grand Feast Choice',
     inclusions: [
-      'Truffle Wild Mushroom Arancini with Garlic Aioli',
-      'Citrus Poached Jumbo Shrimp Skewers with Chili-Lime Glaze',
-      'Artisan Charcuterie & Aged Cheese Display with Honeycomb & Fig Jam',
-      'Heirloom Tomato & Burrata Crostini with Basil Reduction',
-      'Mini French Macaron Towers & Chocolate Ganache Tartlets',
-      'Chafing setup & elegant display platters included'
+      'Royal Chicken Dum Biryani & Fragrant Chana / Matar Basmati Pulao',
+      'Traditional Nargisi Koftay in velvety gravy with farm egg halves',
+      'Slow-Simmered Rich Mutton Korma with aromatic cardamom and fried onions',
+      'Sizzling Tawa Chicken Roast leg quarters with charred peppers',
+      'Crispy Vegetable Pakoras & Melt-in-mouth Shami Kebabs',
+      'Creamy Dahi Bhallay, Mint Zeera Raita & Shredded Garden Salad',
+      'Dual Traditional Desserts: Royal Badami Kheer & Golden Sweet Zarda Rice',
+      'Complete stainless chafing warmers & serving equipment provided'
     ],
     coursesCount: {
-      appetizers: 4,
-      mains: 0,
-      sides: 1,
+      appetizers: 2,
+      mains: 3,
+      sides: 3,
       desserts: 2
     }
   },
   {
-    id: 'pkg-grand-celebration',
-    name: 'Grand Celebration Buffet',
-    tagline: 'Generous hot dinner buffet with premium carving and seafood selections',
-    description: 'Our signature warm dinner buffet designed for milestone celebrations, galas, and upscale reunions that leave every guest raved.',
-    pricePerPerson: 58,
-    minGuests: 25,
-    suggestedFor: 'Weddings, Galas & Milestone Milestones',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80',
-    badge: 'Chef Choice',
+    id: 'pkg-desi-brunch',
+    name: 'Weekend Desi Nashta & Brunch',
+    tagline: 'Flaky hot parathas, bhuna qeema, halwa puri & desi chai',
+    description: 'The ultimate Sunday family tradition! Crispy layered lachha and stuffed aloo parathas fresh off the tawa, savory bhuna qeema, Lahori anda chana, sarson ka saag with butter, and sweet/salty lassi.',
+    pricePerPerson: 19,
+    minGuests: 10,
+    suggestedFor: 'Sunday Family Brunch, Ameen, Milad & Morning Celebrations',
+    image: '/images/real/IMG-20261013-WA0140.jpg',
+    badge: 'Brunch Favorite',
     inclusions: [
-      'Slow-Braised Rosemary Beef Short Ribs in Red Wine Demi-Glace',
-      'Pan-Seared Wild Salmon Fillets with Lemon Dill Beurre Blanc',
-      'Roasted Garlic & Chive Whipped Yukon Gold Potatoes',
-      'Charred Broccolini & Rainbow Honey-Glazed Carrots',
-      'Artisan Sourdough Rolls with Whipped Sea Salt Butter',
-      'Signature Mixed Berry Mascarpone Tartlets',
-      'Full warming chafer setup & serving utensils'
+      'Freshly cooked Flaky Lachha Parathas & Spiced Stuffed Aloo Parathas',
+      'Homestyle Bhuna Mutton / Chicken Qeema with coriander & green chillies',
+      'Lahori Anda Chana & Murgh Cholay in spiced gravy',
+      'Traditional Sarson Ka Saag with pure Desi Makhan (butter)',
+      'Rich Sooji Halwa garnished with pistachios and almonds',
+      'Mint Yogurt Raita, Mixed Desi Achar & Chilled Sweet or Salty Lassi',
+      'Hot Cardamom Karak Chai station with clay-style cups'
     ],
     coursesCount: {
-      appetizers: 2,
+      appetizers: 1,
       mains: 2,
-      sides: 3,
+      sides: 2,
       desserts: 1
     }
   },
   {
-    id: 'pkg-signature-gala',
-    name: 'The Royal Plated Banquet',
-    tagline: 'Multi-course luxury dining for weddings and black-tie affairs',
-    description: 'Fine-dining perfection brought to your venue with synchronized service, heirloom local produce, and tender artisanal proteins.',
-    pricePerPerson: 85,
-    minGuests: 30,
-    suggestedFor: 'Luxury Weddings & Black-Tie Galas',
-    image: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80',
-    badge: 'Ultra Premium',
+    id: 'pkg-youth-party',
+    name: 'Youth & Kids Party Platter',
+    tagline: 'Comforting wraps, burgers, cheesy pasta & skewers',
+    description: 'A fun, crowd-pleasing spread designed for birthdays, graduations, youth gatherings, and family parties where both adults and kids want comfort food.',
+    pricePerPerson: 18,
+    minGuests: 12,
+    suggestedFor: 'Birthdays, Graduations, Youth Hangouts & Game Nights',
+    image: '/images/real/IMG-20261013-WA0114.jpg',
+    badge: 'Kids & Teens Hit',
     inclusions: [
-      'Amuse-Bouche: Truffled Butternut Squash Cappuccino',
-      'First Course: Burrata & Roasted Golden Beet Carpaccio',
-      'Dual Entrée: Center-Cut Beef Tenderloin & Butter Poached Chilean Sea Bass',
-      'Side: Truffle Potato Dauphinoise & Asparagus Bundles',
-      'Grand Finale: Warm Chocolate Lava Soufflé with Pistachio Gelato',
-      'Dedicated Event Captain and kitchen coordination team'
+      'Toasted Chicken Tikka Paratha Rolls & Wraps wrapped in parchment',
+      'Four-Cheese Baked Keema Lasagna / Pasta Casserole Tray',
+      'Homestyle Juicy Chicken Sliders & Mini Gourmet Burgers',
+      'Glazed Sweet & Spicy Sesame Honey Chicken Bites',
+      'Crispy Seasoned Drumsticks & Chicken Lollipops with garlic dips',
+      'Creamy Macaroni Fruit Salad & Crinkle Fries with seasoned dips',
+      'Assorted party beverages, paper plates & napkins'
     ],
     coursesCount: {
       appetizers: 2,
       mains: 2,
       sides: 2,
-      desserts: 2
+      desserts: 1
     }
   }
 ];
 
 export const MENU_ITEMS: MenuItem[] = [
-  // --- APPETIZERS ---
+  // --- APPETIZERS & FINGER FOODS ---
   {
-    id: 'item-arancini',
-    name: 'Truffle Mushroom Arancini',
-    description: 'Crispy arborio rice spheres stuffed with wild forest mushrooms, fontina cheese, and black truffle oil with garlic aioli dip.',
+    id: 'item-pakoras',
+    name: 'Crispy Golden Homestyle Pakoras',
+    description: 'Crispy fritters freshly fried with julienned onions, spinach, potatoes, and cracked whole coriander seeds. Served with tangy mint-coriander chutney.',
     category: 'appetizers',
     pricingType: 'per_tray',
-    price: 95,
-    serves: '24 pieces (serves 10-12)',
-    dietary: ['vegetarian', 'nut-free'],
-    image: 'https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=800&q=80',
+    price: 45,
+    serves: 'Party tray (serves 12-15)',
+    dietary: ['vegetarian', 'vegan', 'gluten-free', 'dairy-free', 'halal'],
+    image: '/images/real/IMG-20261013-WA0198.jpg',
     popular: true
   },
   {
-    id: 'item-shrimp-skewers',
-    name: 'Citrus Poached Jumbo Shrimp Skewers',
-    description: 'Succulent tiger shrimp marinated in lime zest, cilantro, and chili-garlic glaze served chilled with roasted mango dip.',
+    id: 'item-tikka-skewers',
+    name: 'Flame-Grilled Chicken Tikka Skewers',
+    description: 'Boneless chicken thighs marinated in yogurt, tandoori spices, and lemon juice, skewered with bell peppers and charred red onions.',
     category: 'appetizers',
-    pricingType: 'per_tray',
-    price: 135,
-    serves: '30 skewers (serves 12-15)',
-    dietary: ['gluten-free', 'dairy-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=800&q=80',
-    popular: true
-  },
-  {
-    id: 'item-goat-cheese-crostini',
-    name: 'Roasted Beet & Whipped Goat Cheese Crostini',
-    description: 'Crispy French baguette crisps topped with whipped honey chèvre, thyme-roasted golden beets, and candied walnuts.',
-    category: 'appetizers',
-    pricingType: 'per_tray',
-    price: 85,
-    serves: '25 pieces (serves 10-12)',
-    dietary: ['vegetarian'],
-    image: 'https://images.unsplash.com/photo-1505253758473-96b3015f21c9?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'item-chicken-satay',
-    name: 'Lemongrass Grilled Chicken Satay',
-    description: 'Tender chicken skewers charred with lemongrass and coconut cream, served with warm spiced peanut satay dip.',
-    category: 'appetizers',
-    pricingType: 'per_tray',
-    price: 110,
-    serves: '30 skewers (serves 12-15)',
-    dietary: ['gluten-free', 'dairy-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=800&q=80',
-    popular: true
-  },
-  {
-    id: 'item-falafel-bites',
-    name: 'Crispy Herb Falafel with Tahini Drizzle',
-    description: 'Golden chickpea patties freshly seasoned with parsley, cumin, and coriander, accompanied by pickled turnip and garlic tahini.',
-    category: 'appetizers',
-    pricingType: 'per_tray',
-    price: 80,
-    serves: '30 pieces (serves 10-15)',
-    dietary: ['vegan', 'vegetarian', 'gluten-free', 'halal', 'dairy-free'],
-    image: 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80'
-  },
-
-  // --- MAINS ---
-  {
-    id: 'item-short-ribs',
-    name: 'Slow-Braised Rosemary Beef Short Ribs',
-    description: 'Boneless beef short ribs slow-simmered for 8 hours in Cabernet Sauvignon, aromatic mirepoix, and fresh rosemary sprigs.',
-    category: 'mains',
-    pricingType: 'per_person',
-    price: 24,
-    serves: 'Minimum 10 portions',
-    dietary: ['gluten-free', 'dairy-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
-    popular: true,
-    minQty: 10
-  },
-  {
-    id: 'item-salmon-dill',
-    name: 'Pan-Seared Wild Salmon with Lemon Dill Beurre Blanc',
-    description: 'Sustainably sourced salmon fillets pan-crisped to perfection, finished with creamy French butter, white wine, and fresh dill.',
-    category: 'mains',
-    pricingType: 'per_person',
-    price: 22,
-    serves: 'Minimum 10 portions',
-    dietary: ['gluten-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80',
-    popular: true,
-    minQty: 10
-  },
-  {
-    id: 'item-herb-chicken',
-    name: 'Herb-Roasted Free-Range Chicken Supreme',
-    description: 'Juicy bone-in breast with crisp herb crust, served with pan-roasted shallot jus and caramelized lemon wheels.',
-    category: 'mains',
-    pricingType: 'per_person',
-    price: 18,
-    serves: 'Minimum 10 portions',
-    dietary: ['gluten-free', 'dairy-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=800&q=80',
-    minQty: 10
-  },
-  {
-    id: 'item-stuffed-butternut',
-    name: 'Stuffed Butternut Squash with Quinoa & Cranberries',
-    description: 'Roasted butternut squash halves filled with toasted tri-color quinoa, tart cranberries, spiced pecans, and sage emulsion.',
-    category: 'mains',
-    pricingType: 'per_person',
-    price: 17,
-    serves: 'Minimum 6 portions',
-    dietary: ['vegan', 'vegetarian', 'gluten-free', 'dairy-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=800&q=80',
-    minQty: 6
-  },
-  {
-    id: 'item-lamb-kebabs',
-    name: 'Mediterranean Lemon Herb Lamb Kebabs',
-    description: 'Spiced tender lamb skewers grilled over open flame, served with roasted tomatoes, tzatziki sauce, and grilled flatbreads.',
-    category: 'mains',
-    pricingType: 'per_person',
-    price: 23,
-    serves: 'Minimum 10 portions',
-    dietary: ['gluten-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80',
-    minQty: 10
-  },
-
-  // --- PLATTERS & TRAYS ---
-  {
-    id: 'item-charcuterie-board',
-    name: 'Grand Artisan Charcuterie & Fromage Board',
-    description: 'Cured Italian meats, triple-cream brie, aged cheddar, gorgonzola, Marcona almonds, honeycomb, grapes, and gourmet crackers.',
-    category: 'platters',
-    pricingType: 'per_tray',
-    price: 160,
-    serves: 'Serves 18-20 guests',
-    dietary: [],
-    image: 'https://images.unsplash.com/photo-1631709497146-a239ef373cf1?auto=format&fit=crop&w=800&q=80',
-    popular: true
-  },
-  {
-    id: 'item-sandwich-platter',
-    name: 'Signature Gourmet Wrap & Sandwich Platter',
-    description: 'Assortment of Turkey-Brie-Fig, Roasted Veggie Caprese, Flank Steak with Chimichurri, and Curried Chickpea salad wraps.',
-    category: 'platters',
-    pricingType: 'per_tray',
-    price: 145,
-    serves: 'Serves 12-15 guests (24 halves)',
-    dietary: ['vegetarian'],
-    image: 'https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=800&q=80',
-    popular: true
-  },
-  {
-    id: 'item-mezze-platter',
-    name: 'Eastern Mediterranean Mezze Board',
-    description: 'Silky roasted garlic hummus, smoky baba ghanoush, marinated Kalamata olives, stuffed grape leaves, feta cheese, and warm pita.',
-    category: 'platters',
-    pricingType: 'per_tray',
-    price: 120,
-    serves: 'Serves 15-18 guests',
-    dietary: ['vegetarian', 'halal'],
-    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'item-tasting-fruit-platter',
-    name: 'Exotic Seasonal Fruit & Berry Cascade',
-    description: 'Carved dragonfruit, golden pineapple, ripe blackberries, passionfruit, kiwi, and fresh mint sprigs with honey lime dip.',
-    category: 'platters',
-    pricingType: 'per_tray',
-    price: 95,
-    serves: 'Serves 18-22 guests',
-    dietary: ['vegan', 'vegetarian', 'gluten-free', 'dairy-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=800&q=80'
-  },
-
-  // --- SIDES ---
-  {
-    id: 'item-garlic-potatoes',
-    name: 'Roasted Garlic & Yukon Gold Mashed Potatoes',
-    description: 'Velvety Yukon gold potatoes whipped with sweet roasted garlic bulbs, organic butter, and fresh garden chives.',
-    category: 'sides',
-    pricingType: 'per_tray',
-    price: 65,
-    serves: 'Serves 12-15 guests',
-    dietary: ['vegetarian', 'gluten-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'item-broccolini',
-    name: 'Charred Broccolini with Calabrian Chili Crunch',
-    description: 'Tender baby broccolini flash-grilled with extra virgin olive oil, sea salt flakes, toasted garlic chips, and mild chili crunch.',
-    category: 'sides',
     pricingType: 'per_tray',
     price: 75,
-    serves: 'Serves 12-15 guests',
-    dietary: ['vegan', 'vegetarian', 'gluten-free', 'dairy-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1546793665-c74683f339c1?auto=format&fit=crop&w=800&q=80',
+    serves: '25 skewers (serves 12-15)',
+    dietary: ['gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0064.jpg',
     popular: true
   },
   {
-    id: 'item-burrata-salad',
-    name: 'Heirloom Tomato & Buffalo Burrata Salad',
-    description: 'Ripe tri-color heirloom tomatoes, fresh buffalo burrata, micro basil, aged Modena balsamic glaze, and flake sea salt.',
-    category: 'sides',
+    id: 'item-shami-kebabs',
+    name: 'Melt-in-Mouth Shami Kebabs Platter',
+    description: 'Velvety minced beef and chana dal slow-cooked with aromatic garam masala, finely mashed and pan-fried with egg coating to golden perfection.',
+    category: 'appetizers',
     pricingType: 'per_tray',
-    price: 85,
-    serves: 'Serves 12-15 guests',
-    dietary: ['vegetarian', 'gluten-free', 'nut-free'],
-    image: 'https://images.unsplash.com/photo-1592417817098-8f3d6910985b?auto=format&fit=crop&w=800&q=80'
+    price: 60,
+    serves: '24 pieces (serves 12-15)',
+    dietary: ['gluten-free', 'dairy-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0168.jpg',
+    popular: true
   },
   {
-    id: 'item-truffle-mac',
-    name: 'Four-Cheese Truffle Cavatappi Bake',
-    description: 'Spiral cavatappi pasta smothered in aged Gruyère, fontina, sharp white cheddar, black truffle butter, and toasted panko.',
-    category: 'sides',
+    id: 'item-crispy-drumsticks',
+    name: 'Crispy Seasoned Drumsticks & Lollipops',
+    description: 'Tender chicken drumsticks seasoned in Umber\'s secret spice marinade and fried crisp on the outside, juicy on the inside.',
+    category: 'appetizers',
+    pricingType: 'per_tray',
+    price: 65,
+    serves: '20 pieces (serves 10-12)',
+    dietary: ['halal', 'nut-free', 'dairy-free'],
+    image: '/images/real/IMG-20261013-WA0184.jpg'
+  },
+  {
+    id: 'item-samosas',
+    name: 'Crispy Golden Potato & Pea Samosas',
+    description: 'Flaky hand-wrapped pastry triangles stuffed with spiced cumin potatoes, sweet peas, and fresh cilantro. Served with tamarind dip.',
+    category: 'appetizers',
+    pricingType: 'per_tray',
+    price: 45,
+    serves: '24 samosas (serves 12-15)',
+    dietary: ['vegetarian', 'vegan', 'dairy-free', 'halal'],
+    image: '/images/real/IMG-20261013-WA0128.jpg'
+  },
+  {
+    id: 'item-party-kabab-sticks',
+    name: 'Party Kabab Sticks & Puff Bites',
+    description: 'Bite-sized spiced seekh kabab skewers served alongside flaky stuffed puff pastries and party dips.',
+    category: 'appetizers',
+    pricingType: 'per_tray',
+    price: 60,
+    serves: 'Platter serves 12-15',
+    dietary: ['halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0050.jpg'
+  },
+
+  // --- MAINS & CURRIES ---
+  {
+    id: 'item-biryani-tray',
+    name: 'Royal Chicken Dum Biryani (Party Tray)',
+    description: 'Long-grain aged basmati rice layered with succulent marinated chicken, saffron strands, fried golden onions, fresh mint, and whole aromatic spices.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 85,
+    serves: 'Full Half-Steam Tray (serves 10-12)',
+    dietary: ['gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0187.jpg',
+    popular: true
+  },
+  {
+    id: 'item-chicken-karahi',
+    name: 'Authentic Homestyle Chicken Karahi',
+    description: 'Tender chicken braised in a wok with fresh vine-ripened tomatoes, crushed ginger, garlic, green chilies, and freshly roasted black pepper.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 75,
+    serves: 'Full Half-Steam Tray (serves 10-12)',
+    dietary: ['gluten-free', 'dairy-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0194.jpg',
+    popular: true
+  },
+  {
+    id: 'item-nargisi-koftay',
+    name: 'Traditional Nargisi Koftay with Egg Halves',
+    description: 'Umber\'s signature specialty: tender spiced meatballs simmered in a velvety, onion-tomato gravy and crowned with farm-fresh hard-boiled egg halves.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 85,
+    serves: 'Full Half-Steam Tray (serves 10-12)',
+    dietary: ['gluten-free', 'dairy-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0088.jpg',
+    popular: true
+  },
+  {
+    id: 'item-tawa-roast',
+    name: 'Sizzling Tawa Chicken Roast',
+    description: 'Full chicken leg quarters scored and marinated in rich tandoori spices and yogurt, slow-seared on a cast-iron tawa with caramelized masala.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 75,
+    serves: '12 large pieces (serves 10-12)',
+    dietary: ['gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0073.jpg',
+    popular: true
+  },
+  {
+    id: 'item-mutton-korma',
+    name: 'Slow-Simmered Shahi Mutton Korma',
+    description: 'Tender bone-in goat or lamb simmered in a silky spiced yogurt and fried onion gravy infused with kewra water, cardamom, and mace.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 110,
+    serves: 'Full Half-Steam Tray (serves 10-12)',
+    dietary: ['gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0050.jpg'
+  },
+  {
+    id: 'item-sesame-chicken',
+    name: 'Sweet & Spicy Honey Sesame Chicken',
+    description: 'Bite-sized chicken tossed in a savory honey-garlic and chili glaze, topped with toasted white sesame seeds and scallions.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 70,
+    serves: 'Full Half-Steam Tray (serves 10-12)',
+    dietary: ['halal', 'dairy-free'],
+    image: '/images/real/IMG-20261013-WA0065.jpg'
+  },
+  {
+    id: 'item-stuffed-karela',
+    name: 'Bharwan Karela (Stuffed Bitter Gourd)',
+    description: 'Traditional Punjabi recipe: tender bitter gourd stuffed with a savory spiced dal and onion filling, pan-roasted until golden and fragrant.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 60,
+    serves: 'Serves 8-10',
+    dietary: ['vegetarian', 'vegan', 'gluten-free', 'halal', 'dairy-free'],
+    image: '/images/real/IMG-20261013-WA0190.jpg'
+  },
+  {
+    id: 'item-anda-chana',
+    name: 'Lahori Murgh Cholay & Anda Chana',
+    description: 'Plump chickpeas simmered in a spiced black pepper and cumin gravy with tender chicken cuts and boiled eggs.',
+    category: 'mains',
+    pricingType: 'per_tray',
+    price: 60,
+    serves: 'Full Half-Steam Tray (serves 10-12)',
+    dietary: ['gluten-free', 'dairy-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0079.jpg'
+  },
+
+  // --- PLATTERS & FAMILY TRAYS ---
+  {
+    id: 'item-paratha-rolls-platter',
+    name: 'Chicken Tikka Paratha Rolls & Sliders Platter',
+    description: 'Crispy paratha wraps stuffed with smoky chicken tikka, sliced onions, and garlic-mint mayo, paired with juicy mini chicken burgers.',
+    category: 'platters',
     pricingType: 'per_tray',
     price: 80,
     serves: 'Serves 12-15 guests',
-    dietary: ['vegetarian', 'nut-free'],
-    image: 'https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=800&q=80'
+    dietary: ['halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0114.jpg',
+    popular: true
+  },
+  {
+    id: 'item-keema-lasagna',
+    name: 'Cheesy Keema Lasagna / Pasta Bake Casserole',
+    description: 'Layered pasta sheets packed with seasoned spiced minced beef (keema), rich bechamel, marinara, and a melted bubbly double cheese crust.',
+    category: 'platters',
+    pricingType: 'per_tray',
+    price: 70,
+    serves: 'Large Pyrex / Steam Tray (serves 12-15)',
+    dietary: ['halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0180.jpg',
+    popular: true
+  },
+  {
+    id: 'item-daawat-buffet-spread',
+    name: 'Grand Family Daawat Table Platter',
+    description: 'An all-in-one family buffet tray combination: chicken curry, pulao, tawa roast, seekh kebabs, pasta, and fresh mint chutney.',
+    category: 'platters',
+    pricingType: 'per_tray',
+    price: 165,
+    serves: 'Feast spread for 15-18 guests',
+    dietary: ['halal'],
+    image: '/images/real/IMG-20261013-WA0070.jpg'
+  },
+  {
+    id: 'item-club-sandwiches',
+    name: 'Toasted Chicken & Egg Club Sandwiches Platter',
+    description: 'Classic bakery-style triple-decker toasted triangle sandwiches layered with shredded spiced chicken, egg spread, crisp lettuce, and mayo.',
+    category: 'platters',
+    pricingType: 'per_tray',
+    price: 55,
+    serves: '24 triangles (serves 10-12)',
+    dietary: ['halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0088.jpg'
+  },
+
+  // --- BREADS, RICE & SIDES ---
+  {
+    id: 'item-basmati-pulao',
+    name: 'Degi Matar & Vegetable Basmati Pulao',
+    description: 'Fragrant basmati rice gently cooked in spiced vegetable broth with tender sweet peas, potatoes, carrots, cumin, and fried onions.',
+    category: 'sides',
+    pricingType: 'per_tray',
+    price: 50,
+    serves: 'Full Half-Steam Tray (serves 12-15)',
+    dietary: ['vegetarian', 'vegan', 'gluten-free', 'halal', 'dairy-free', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0178.jpg',
+    popular: true
+  },
+  {
+    id: 'item-parathas-basket',
+    name: 'Fresh Tawa Lachha & Stuffed Parathas (15 pcs)',
+    description: 'Handmade flaky multi-layered wheat parathas cooked golden on the tawa with pure ghee. Includes mix of plain lachha and spiced aloo.',
+    category: 'sides',
+    pricingType: 'per_tray',
+    price: 40,
+    serves: '15 parathas (serves 10-12)',
+    dietary: ['vegetarian', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0172.jpg',
+    popular: true
+  },
+  {
+    id: 'item-daal-tadka',
+    name: 'Homestyle Chana & Moong Daal Tadka',
+    description: 'Comforting lentils simmered to perfection and tempered with sizzling garlic, cumin seeds, dried red chilies, and fresh cilantro.',
+    category: 'sides',
+    pricingType: 'per_tray',
+    price: 45,
+    serves: 'Serves 12-15 guests',
+    dietary: ['vegetarian', 'vegan', 'gluten-free', 'halal', 'dairy-free', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0100.jpg'
+  },
+  {
+    id: 'item-sarson-saag',
+    name: 'Authentic Sarson Ka Saag with Makhan',
+    description: 'Slow-cooked mustard greens, spinach, and bathua blended with green chilies and ginger, served with a generous dollop of pure desi butter.',
+    category: 'sides',
+    pricingType: 'per_tray',
+    price: 50,
+    serves: 'Serves 10-12 guests',
+    dietary: ['vegetarian', 'gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0140.jpg'
+  },
+  {
+    id: 'item-dahi-bhallay',
+    name: 'Creamy Dahi Bhallay with Papdi & Tamarind',
+    description: 'Soft lentil dumplings soaked in seasoned sweetened yogurt, topped with boiled chickpeas, diced potatoes, chaat masala, and tangy imli chutney.',
+    category: 'sides',
+    pricingType: 'per_tray',
+    price: 45,
+    serves: 'Serves 12-15 guests',
+    dietary: ['vegetarian', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0088.jpg',
+    popular: true
+  },
+  {
+    id: 'item-macaroni-salad',
+    name: 'Creamy Russian Macaroni Salad',
+    description: 'Chilled elbow macaroni tossed with diced apples, pineapple tidbits, peas, sweet corn, and a lightly sweetened creamy dressing.',
+    category: 'sides',
+    pricingType: 'per_tray',
+    price: 40,
+    serves: 'Serves 12-15 guests',
+    dietary: ['vegetarian', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0114.jpg'
   },
 
   // --- DESSERTS ---
   {
-    id: 'item-macarons',
-    name: 'Parisian Macaron Tower Showcase',
-    description: 'Assorted pastel French macarons: salted caramel, Madagascar vanilla bean, raspberry rose, pistachio, and dark chocolate.',
+    id: 'item-badami-kheer',
+    name: 'Royal Badami Kheer (Almond Rice Pudding)',
+    description: 'Slow-simmered whole milk and fragrant basmati rice infused with green cardamom, saffron, and crowned with toasted whole and crushed almonds.',
     category: 'desserts',
     pricingType: 'per_tray',
-    price: 90,
-    serves: '36 macarons (serves 15-18)',
-    dietary: ['vegetarian', 'gluten-free'],
-    image: 'https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=800&q=80',
+    price: 50,
+    serves: 'Large party dish (serves 15-18)',
+    dietary: ['vegetarian', 'gluten-free', 'halal'],
+    image: '/images/real/IMG-20261013-WA0105.jpg',
     popular: true
   },
   {
-    id: 'item-berry-tartlets',
-    name: 'Mascarpone & Fresh Berry Tartlets',
-    description: 'Buttery shortcrust pastry shells piped with vanilla bean mascarpone and piled with fresh raspberries, blueberries, and mint.',
+    id: 'item-rice-kheer',
+    name: 'Homestyle Cardamom Rice Kheer',
+    description: 'Creamy traditional rice pudding delicately spiced with aromatic cardamom pods, condensed milk, and crushed pistachios.',
     category: 'desserts',
     pricingType: 'per_tray',
-    price: 85,
-    serves: '24 tartlets (serves 12-15)',
-    dietary: ['vegetarian', 'nut-free'],
-    image: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=800&q=80'
+    price: 45,
+    serves: 'Serves 12-15 guests',
+    dietary: ['vegetarian', 'gluten-free', 'halal'],
+    image: '/images/real/IMG-20261013-WA0037.jpg'
   },
   {
-    id: 'item-choc-brownie',
-    name: 'Decadent Valrhona Double Chocolate Brownies',
-    description: 'Dense, fudgy 70% dark chocolate brownie squares topped with Maldon sea salt and espresso ganache drizzle.',
+    id: 'item-zarda',
+    name: 'Traditional Sweet Saffron Zarda Rice',
+    description: 'Festive sweet basmati rice infused with pure saffron, cardamom, raisins, silver almonds, and baby gulab jamuns.',
     category: 'desserts',
     pricingType: 'per_tray',
-    price: 70,
-    serves: '24 squares (serves 12-16)',
-    dietary: ['vegetarian', 'nut-free'],
-    image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=80'
+    price: 45,
+    serves: 'Serves 12-15 guests',
+    dietary: ['vegetarian', 'gluten-free', 'halal'],
+    image: '/images/real/IMG-20261013-WA0079.jpg'
   },
 
   // --- BEVERAGES ---
   {
-    id: 'item-citrus-lemonade',
-    name: 'Lavender Rosemary Craft Lemonade Urn',
-    description: 'Cold-pressed freshly squeezed lemons infused with culinary English lavender and aromatic garden rosemary sprigs.',
+    id: 'item-desi-lassi',
+    name: 'Chilled Sweet / Salty Desi Lassi Pitchers',
+    description: 'Thick and frothy traditional yogurt lassi freshly whipped with ice, available in Sweet Rose or Cooling Roasted Cumin Salty.',
+    category: 'beverages',
+    pricingType: 'per_tray',
+    price: 25,
+    serves: '2 Gallon Pitchers (approx 15-20 servings)',
+    dietary: ['vegetarian', 'gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0154.jpg',
+    popular: true
+  },
+  {
+    id: 'item-rooh-afza',
+    name: 'Refreshing Rooh Afza Sherbet with Mint',
+    description: 'Chilled rose and herbal cordial mixed with lemon, fresh mint leaves, and ice. The quintessential welcoming daawat drink.',
+    category: 'beverages',
+    pricingType: 'per_tray',
+    price: 22,
+    serves: '2 Gallon Pitchers (approx 15-20 servings)',
+    dietary: ['vegan', 'vegetarian', 'gluten-free', 'dairy-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0050.jpg'
+  },
+  {
+    id: 'item-karak-chai',
+    name: 'Fresh Brewed Cardamom Karak Chai Station',
+    description: 'Rich, comforting Desi Karak Chai slow-simmered with crushed green cardamom, black tea leaves, and whole milk. Kept hot in an insulated urn.',
     category: 'beverages',
     pricingType: 'per_tray',
     price: 45,
-    serves: '3 Gallon Urn (approx 30 servings)',
-    dietary: ['vegan', 'vegetarian', 'gluten-free', 'dairy-free', 'nut-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'item-coffee-service',
-    name: 'Artisan Roast Coffee & Tea Station',
-    description: 'Freshly brewed single-origin medium roast coffee, decaf, hot water dispenser with selection of herbal teas, creamers, sugars, and cups.',
-    category: 'beverages',
-    pricingType: 'per_tray',
-    price: 65,
-    serves: 'Serves 25-30 cups with full fixings',
-    dietary: ['vegetarian', 'gluten-free', 'halal'],
-    image: 'https://images.unsplash.com/photo-1509785307050-d4066910ec1e?auto=format&fit=crop&w=800&q=80',
+    serves: 'Insulated urn (approx 25-30 cups with cups & sugars)',
+    dietary: ['vegetarian', 'gluten-free', 'halal', 'nut-free'],
+    image: '/images/real/IMG-20261013-WA0154.jpg',
     popular: true
   }
 ];
 
 export const SERVICE_ADDONS: ServiceAddon[] = [
   {
-    id: 'addon-server',
-    name: 'Professional Uniformed Service Staff',
-    description: 'Dedicated professional waitstaff to assist with food replenishment, guest clearing, and keeping the presentation flawless.',
-    price: 45,
-    unit: 'per_hour',
-    defaultQty: 4
-  },
-  {
-    id: 'addon-bartender',
-    name: 'TIPS-Certified Mixologist / Bartender',
-    description: 'Skilled bartender providing bar setup, cocktail mixing, wine pouring, and bottle management (beverages provided separately).',
-    price: 55,
-    unit: 'per_hour',
-    defaultQty: 4
-  },
-  {
     id: 'addon-chafers',
-    name: 'Stainless Chafing Dishes & Sterno Fuel Kit',
-    description: 'Includes commercial mirror-finish chafers, water pans, fuel burners (stays hot for 3 hours), and serving tongs/spoons.',
-    price: 25,
+    name: 'Stainless Chafing Dishes & Sterno Warmers Kit',
+    description: 'Includes commercial mirror-finish chafers, water pans, fuel burners (keeps food hot for 3+ hours), and serving spoons/tongs.',
+    price: 20,
     unit: 'per_unit',
     defaultQty: 2
   },
   {
+    id: 'addon-dastarkhwan',
+    name: 'Traditional Dastarkhwan Floor Setting Setup',
+    description: 'Traditional fabric floor runners, bolsters/cushions arrangement, and authentic communal dining presentation.',
+    price: 45,
+    unit: 'flat',
+    defaultQty: 1
+  },
+  {
+    id: 'addon-server',
+    name: 'Friendly Catering Attendant / Food Server',
+    description: 'Helpful attendant to unpack trays, maintain warming chafers, replenish breads, and ensure seamless hospitality.',
+    price: 35,
+    unit: 'per_hour',
+    defaultQty: 4
+  },
+  {
     id: 'addon-dinnerware',
-    name: 'Premium Eco-Bamboo Plates & Cutlery Set',
-    description: 'Sturdy, sustainable bamboo dinner plates, dessert plates, heavy-duty cutlery, and linen-feel 3-ply dinner napkins.',
-    price: 3.5,
+    name: 'Heavy-Duty Family Feast Plates & Cutlery Kit',
+    description: 'Sturdy disposable plates, bowls, cups, heavy-duty cutlery, and napkins suitable for generous hot curries and biryani.',
+    price: 2,
     unit: 'per_person',
     defaultQty: 1
   },
   {
-    id: 'addon-linens',
-    name: 'Pressed White/Black Banquet Linens',
-    description: 'Crisp, professionally laundered 120-inch round or 8-foot rectangular banquet tablecloths with matching table skirts.',
-    price: 15,
-    unit: 'per_unit',
-    defaultQty: 3
-  },
-  {
-    id: 'addon-floral-styling',
-    name: 'Artisan Buffet Styling & Botanical Decor',
-    description: 'Fresh eucalyptus runners, risers, slate elevation stands, chalkboard menu signs, and candle accents curated by our stylist.',
-    price: 150,
+    id: 'addon-chai-service',
+    name: 'Live Karak Chai Urn Setup & Clay Cups',
+    description: 'Hot simmering chai urn kept piping hot during your whole event, complete with authentic clay-style cups and sugar/sweetener assortment.',
+    price: 40,
     unit: 'flat',
     defaultQty: 1
   }
@@ -439,23 +512,23 @@ export const SERVICE_ADDONS: ServiceAddon[] = [
 
 export const CATERING_FAQS = [
   {
-    question: 'How far in advance do I need to place my catering order?',
-    answer: 'We recommend placing orders at least 48 to 72 hours in advance for corporate and social drop-offs. For weddings and large galas requiring staffing and equipment rentals, 2 to 4 weeks notice ensures your preferred date and staff are locked in.'
+    question: 'Are all meats 100% Halal?',
+    answer: 'Yes, absolutely. We strictly source 100% hand-slaughtered Zabiha Halal meats (chicken, beef, mutton) from trusted certified suppliers for every single dish prepared at Umbers Catering House.'
   },
   {
-    question: 'Can you accommodate dietary allergies and restrictions?',
-    answer: 'Absolutely. Over 60% of our menu items are naturally gluten-free, vegetarian, or vegan. All individual allergen items (nuts, shellfish, dairy) are clearly labeled, prepared in dedicated sanitized prep zones, and can be boxed individually upon request.'
+    question: 'How do your catering tray sizes work?',
+    answer: 'Our Half Trays typically serve 10 to 12 guests generously. Our Full Trays serve 20 to 25 guests. If you choose our per-guest curated packages, we handle all portion calculations so your guests leave completely satisfied with plenty of seconds!'
   },
   {
-    question: 'What is the difference between Drop-Off, Set-up & Leave, and Full Service?',
-    answer: 'Drop-Off delivers your food in disposable insulated catering boxes. Set-up & Leave includes our team arriving 45 minutes prior to unbox, set up chafing dishes with sterno fuel, display platters, and arrange utensils. Full Service includes dedicated on-site chefs and waitstaff for the entire event.'
+    question: 'How far in advance should I book my family catering order?',
+    answer: 'For weekend family daawats, birthday parties, and small gatherings, 24 to 48 hours notice is ideal. For large milestone events like weddings, Eid feasts, Khatams, or gatherings over 50 guests, please contact us 1 to 2 weeks ahead to reserve your date.'
   },
   {
-    question: 'Is there a minimum order requirement?',
-    answer: 'For drop-off delivery, our minimum order value is $200. For pre-set packages, each package indicates minimum guest count (typically 10 to 25 guests). If you have a custom event size, simply contact our concierge team.'
+    question: 'Does the food arrive hot and ready to serve?',
+    answer: 'Yes! All dishes are cooked fresh in our kitchen just hours before your event and arrive hot in insulated thermal carriers or foil steam trays ready to place immediately on your dining table or warming chafers.'
   },
   {
-    question: 'How does payment and confirmation work?',
-    answer: 'When you submit your order online, you will receive an instant order number and itemized breakdown. Our catering director will contact you within 2 hours to confirm logistics, address any special venue requirements, and send a final invoice with flexible deposit options.'
+    question: 'Can you customize spice levels for children and elders?',
+    answer: 'Yes, definitely! Because every dish is cooked homestyle from scratch by Chef Umber, you can request mild, medium, or authentic traditional desi spice levels, as well as specific preferences for kids and elders.'
   }
 ];

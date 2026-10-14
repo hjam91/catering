@@ -61,7 +61,7 @@ function ConfirmationContent() {
   useEffect(() => {
     if (orderId) {
       const found = getClientOrderById(orderId);
-      setOrder(found);
+      setOrder(found || null);
     }
     setLoading(false);
   }, [orderId]);

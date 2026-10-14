@@ -20,6 +20,7 @@ import {
   CustomerInfo,
   DietaryTag,
   MenuCategory,
+  CateringOrder,
 } from '@/types/catering';
 import {
   Calendar,
@@ -57,7 +58,7 @@ function OrderWizardContent() {
     date: tomorrow,
     time: '12:30',
     guestCount: 25,
-    eventType: 'Corporate Luncheon',
+    eventType: 'Family Daawat & Dinner',
     serviceStyle: 'setup_and_go',
     venueName: '',
     address: '',
@@ -69,7 +70,7 @@ function OrderWizardContent() {
   // Step 2: Menu Selection State
   // Order mode: 'package' or 'custom'
   const [orderMode, setOrderMode] = useState<'package' | 'custom'>('package');
-  const [selectedPackageId, setSelectedPackageId] = useState<string>('pkg-executive-lunch');
+  const [selectedPackageId, setSelectedPackageId] = useState<string>('pkg-classic-daawat');
   const [selectedItems, setSelectedItems] = useState<Map<string, number>>(new Map());
   const [activeCategory, setActiveCategory] = useState<MenuCategory | 'all'>('all');
   const [dietaryFilter, setDietaryFilter] = useState<DietaryTag | 'all'>('all');
@@ -258,7 +259,11 @@ function OrderWizardContent() {
     setIsSubmitting(true);
     setErrorMessage('');
 
-    const orderPayload = {
+    const newOrderId = 'CAT-' + Math.floor(1000 + Math.random() * 9000);
+    const orderPayload: CateringOrder = {
+      id: newOrderId,
+      createdAt: new Date().toISOString(),
+      status: 'submitted',
       eventDetails,
       selectedPackage: orderMode === 'package' && selectedPackage ? {
         packageId: selectedPackage.id,
@@ -281,21 +286,21 @@ function OrderWizardContent() {
 
     try {
       // 1. Save in client local persistence
-      const newOrder = saveClientOrder(orderPayload);
+      saveClientOrder(orderPayload);
 
       // 2. Attempt server API call in background
       try {
         fetch('/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newOrder),
+          body: JSON.stringify(orderPayload),
         }).catch(err => console.warn('Server sync optional:', err));
       } catch (err) {
         console.warn('API sync skipped:', err);
       }
 
       // 3. Immediately redirect to universal confirmation page
-      router.push(`/order/confirmation?id=${newOrder.id}`);
+      router.push(`/order/confirmation?id=${newOrderId}`);
     } catch (err: any) {
       console.error(err);
       setErrorMessage(err.message || 'An unexpected error occurred. Please try again.');
@@ -474,12 +479,13 @@ function OrderWizardContent() {
                       onChange={e => setEventDetails({ ...eventDetails, eventType: e.target.value })}
                       className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
                     >
-                      <option value="Corporate Luncheon">Corporate Luncheon / Summit</option>
-                      <option value="Wedding & Reception">Wedding & Rehearsal Dinner</option>
-                      <option value="Cocktail Mixer">Cocktail Reception / Happy Hour</option>
-                      <option value="Social Gathering">Private Party / Birthday</option>
-                      <option value="Conference">Multi-Session Conference</option>
-                      <option value="Fundraiser Gala">Charity Gala / Fundraiser</option>
+                      <option value="Family Daawat & Dinner">Family Daawat & Dinner Gathering</option>
+                      <option value="Eid & Ramadan Celebration">Eid & Ramadan Celebration / Iftar</option>
+                      <option value="Wedding, Mehndi & Nikkah">Wedding, Mehndi & Nikkah Banquet</option>
+                      <option value="Birthday & Kids Party">Birthday & Kids / Youth Party</option>
+                      <option value="Sunday Desi Brunch">Sunday Desi Nashta & Family Brunch</option>
+                      <option value="Milad & Khatam Gathering">Ameen, Milad & Khatam Feast</option>
+                      <option value="Corporate & Community Event">Office Lunch & Community Gathering</option>
                     </select>
                   </div>
 
@@ -492,9 +498,9 @@ function OrderWizardContent() {
                       onChange={e => setEventDetails({ ...eventDetails, serviceStyle: e.target.value as any })}
                       className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
                     >
-                      <option value="setup_and_go">Setup & Go (Staff arranges chafers & buffet, then departs)</option>
-                      <option value="drop_off">Drop-Off Delivery (Insulated disposable packaging)</option>
-                      <option value="full_service">Full-Service (On-site serving staff & bartending)</option>
+                      <option value="setup_and_go">Setup & Go (Staff arranges steam trays & buffet, then departs)</option>
+                      <option value="drop_off">Drop-Off Delivery (Insulated containers ready to serve)</option>
+                      <option value="full_service">Full-Service (Friendly on-site serving staff & replenishment)</option>
                     </select>
                   </div>
                 </div>

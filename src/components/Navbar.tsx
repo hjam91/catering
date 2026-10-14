@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
           <div className="flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>✨ 100% Zabiha Halal • Authentic Home-Cooked Feasts (Max 50 Guests • Min. 1 Week Advance Notice)</span>
+            <span>✨ 100% Zabiha Halal • Limited to Brooklyn, NY • Max 50 Guests • Min. 1 Week Notice</span>
           </div>
           <div className="flex items-center gap-4 text-amber-200/90">
             <Link

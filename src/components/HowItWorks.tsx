@@ -23,8 +23,8 @@ const STEPS = [
   {
     step: '04',
     icon: Truck,
-    title: 'Piping Hot Delivery To Your Table',
-    description: 'Your food arrives steaming hot in insulated containers or aluminum steam pans ready to serve immediately onto your table or dastarkhwan.',
+    title: 'Piping Hot Delivery Across Brooklyn',
+    description: 'Your food arrives steaming hot in insulated containers ready to serve immediately onto your table or dastarkhwan anywhere across Brooklyn, NY.',
   },
 ];
 

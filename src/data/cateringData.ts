@@ -524,6 +524,10 @@ export const CATERING_FAQS = [
     answer: 'We cater for intimate to medium-sized family gatherings with a strict maximum of 50 guests. Capping each event at 50 guests ensures that every single dish is cooked with the same love, rich taste, and artisanal attention as a private family meal.'
   },
   {
+    question: 'What delivery locations and areas do you serve?',
+    answer: 'Our catering service, delivery, and setup are strictly limited to Brooklyn, NY (all Brooklyn neighborhoods and event venues). Because Chef Umber personally oversees delivery to ensure food arrives steaming hot from our kitchen right to your table, our delivery radius is exclusively restricted to Brooklyn.'
+  },
+  {
     question: 'How do your catering tray sizes work?',
     answer: 'Our Half Trays typically serve 10 to 12 guests generously. Our Full Trays serve 20 to 25 guests. If you choose our per-guest curated packages, we handle all portion calculations so your guests leave completely satisfied with plenty of seconds!'
   },

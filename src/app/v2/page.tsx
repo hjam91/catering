@@ -86,16 +86,20 @@ export default function V2AtelierPage() {
       <div className="bg-gradient-to-r from-[#0C3224] via-[#124231] to-[#0C3224] border-b border-[#E5B842]/20 py-2.5 px-4 text-center text-xs text-[#E9DFC7]">
         <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-medium">
           <span className="bg-[#E5B842] text-[#071913] font-bold text-[10px] tracking-wider uppercase px-2 py-0.5 rounded">
-            Kitchen Policy
+            Service Policy
           </span>
+          <span className="flex items-center gap-1 font-bold text-white">
+            <span>📍 Limited to Brooklyn, NY</span>
+          </span>
+          <span className="text-[#E5B842]/40 hidden sm:inline">•</span>
           <span className="flex items-center gap-1">
             <Clock className="w-3.5 h-3.5 text-[#E5B842]" />
-            <span>Minimum <strong>1 Week (7 Days) Advance Notice</strong> Required</span>
+            <span>Min. <strong>1 Week (7 Days) Advance Notice</strong></span>
           </span>
           <span className="text-[#E5B842]/40 hidden sm:inline">•</span>
           <span className="flex items-center gap-1">
             <Users className="w-3.5 h-3.5 text-[#E5B842]" />
-            <span>Intimate Gatherings Strictly Capped at <strong>Max 50 Guests</strong></span>
+            <span>Strictly Capped at <strong>Max 50 Guests</strong></span>
           </span>
           <span className="text-[#E5B842]/40 hidden sm:inline">•</span>
           <span className="flex items-center gap-1 text-emerald-300">
@@ -189,18 +193,22 @@ export default function V2AtelierPage() {
               </p>
 
               {/* Guarantees Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-stone-800/80">
-                <div className="p-4 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
-                  <div className="text-[#E5B842] font-bold text-lg font-serif">50 Max Guests</div>
-                  <div className="text-[11px] text-[#A6977D] mt-0.5">Strict capacity cap ensuring home-cooked perfection</div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-stone-800/80">
+                <div className="p-3.5 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
+                  <div className="text-[#E5B842] font-bold text-base font-serif">Brooklyn Only</div>
+                  <div className="text-[10px] text-[#A6977D] mt-0.5">Strict delivery radius for hot freshness</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
-                  <div className="text-[#E5B842] font-bold text-lg font-serif">7-Day Notice</div>
-                  <div className="text-[11px] text-[#A6977D] mt-0.5">Slow overnight marinades & freshly ground spices</div>
+                <div className="p-3.5 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
+                  <div className="text-[#E5B842] font-bold text-base font-serif">50 Max Guests</div>
+                  <div className="text-[10px] text-[#A6977D] mt-0.5">Strict capacity cap for artisanal cooking</div>
                 </div>
-                <div className="p-4 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
-                  <div className="text-[#E5B842] font-bold text-lg font-serif">100% Zabiha</div>
-                  <div className="text-[11px] text-[#A6977D] mt-0.5">Hand-slaughtered Halal certified cuts only</div>
+                <div className="p-3.5 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
+                  <div className="text-[#E5B842] font-bold text-base font-serif">7-Day Notice</div>
+                  <div className="text-[10px] text-[#A6977D] mt-0.5">Slow overnight marinades & spices</div>
+                </div>
+                <div className="p-3.5 rounded-2xl bg-[#0D2920]/60 border border-[#E5B842]/20">
+                  <div className="text-[#E5B842] font-bold text-base font-serif">100% Zabiha</div>
+                  <div className="text-[10px] text-[#A6977D] mt-0.5">Hand-slaughtered Halal cuts only</div>
                 </div>
               </div>
 
@@ -869,7 +877,7 @@ export default function V2AtelierPage() {
               <p className="text-xs text-white font-medium mb-1">Direct Chef Line:</p>
               <p className="text-base font-serif text-[#E5B842] font-bold mb-3">(555) 728-6772</p>
               <p className="text-xs text-[#A6977D]">
-                Serving the local metropolitan area. Inquire early to reserve your weekend kitchen slot.
+                Exclusively serving Brooklyn, NY (All Neighborhoods). Inquire early to reserve your weekend kitchen slot.
               </p>
             </div>
 

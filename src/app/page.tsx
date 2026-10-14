@@ -48,7 +48,7 @@ export default function HomePage() {
               Kitchen Booking Policy
             </span>
             <span>
-              Please allow a <strong>minimum 1 week (7 days) advance notice</strong> for all catering orders. Gatherings are limited to <strong>max 50 guests</strong> to preserve authentic, handcrafted home cooking.
+              Please allow a <strong>minimum 1 week (7 days) advance notice</strong> for all catering orders. Gatherings are limited to <strong>max 50 guests</strong>, and delivery is <strong>exclusively limited to Brooklyn, NY</strong> to preserve authentic, handcrafted home cooking.
             </span>
           </div>
         </div>

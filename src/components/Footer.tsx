@@ -83,7 +83,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-stone-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-amber-500 mt-1 shrink-0" />
-                <span>Serving Local Families, Communities & Event Halls</span>
+                <span>Exclusively Serving Brooklyn, NY (All Neighborhoods)</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-500 shrink-0" />

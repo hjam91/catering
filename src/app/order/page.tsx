@@ -62,8 +62,8 @@ function OrderWizardContent() {
     serviceStyle: 'setup_and_go',
     venueName: '',
     address: '',
-    city: 'Metropolis',
-    postalCode: '10001',
+    city: 'Brooklyn',
+    postalCode: '11201',
     instructions: '',
   });
 
@@ -221,6 +221,12 @@ function OrderWizardContent() {
       }
       if (!eventDetails.address.trim()) {
         setErrorMessage('Please specify the delivery / venue address.');
+        return false;
+      }
+      const cityLower = eventDetails.city.trim().toLowerCase();
+      const addrLower = eventDetails.address.trim().toLowerCase();
+      if (!cityLower.includes('brooklyn') && !addrLower.includes('brooklyn')) {
+        setErrorMessage('Our catering service and delivery is exclusively limited to Brooklyn, NY.');
         return false;
       }
     }
@@ -528,10 +534,20 @@ function OrderWizardContent() {
 
                 {/* Venue / Location Details */}
                 <div className="pt-2 border-t border-stone-100 space-y-4">
-                  <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4 text-amber-600" />
-                    <span>Venue & Delivery Location</span>
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-sm font-bold text-stone-900 flex items-center gap-1.5">
+                      <MapPin className="w-4 h-4 text-amber-600" />
+                      <span>Venue & Delivery Location (Brooklyn, NY Only)</span>
+                    </h3>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-300">
+                      📍 Limited to Brooklyn
+                    </span>
+                  </div>
+
+                  <div className="p-3 bg-amber-50/70 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-center gap-2">
+                    <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                    <span><strong>Service Area:</strong> Hot catering delivery & setup is exclusively limited to residences and venues within <strong>Brooklyn, NY</strong>.</span>
+                  </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="sm:col-span-1">
@@ -540,7 +556,7 @@ function OrderWizardContent() {
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g. Acme HQ, 4th Floor"
+                        placeholder="e.g. Home or Hall"
                         value={eventDetails.venueName}
                         onChange={e => setEventDetails({ ...eventDetails, venueName: e.target.value })}
                         className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-amber-600"
@@ -552,7 +568,7 @@ function OrderWizardContent() {
                       </label>
                       <input
                         type="text"
-                        placeholder="e.g. 500 Market Street, Suite 200"
+                        placeholder="e.g. 125 Atlantic Ave"
                         value={eventDetails.address}
                         onChange={e => setEventDetails({ ...eventDetails, address: e.target.value })}
                         className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-amber-600"
@@ -562,21 +578,24 @@ function OrderWizardContent() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-stone-600 mb-1">City</label>
+                      <label className="block text-xs font-semibold text-stone-600 mb-1">Borough / City *</label>
                       <input
                         type="text"
                         value={eventDetails.city}
                         onChange={e => setEventDetails({ ...eventDetails, city: e.target.value })}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm"
+                        placeholder="Brooklyn"
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm font-medium text-stone-900"
                       />
+                      <span className="text-[10px] text-amber-800 font-medium mt-0.5 block">Exclusively Brooklyn, NY</span>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-stone-600 mb-1">ZIP / Postal Code</label>
+                      <label className="block text-xs font-semibold text-stone-600 mb-1">Brooklyn ZIP Code *</label>
                       <input
                         type="text"
+                        placeholder="e.g. 11201"
                         value={eventDetails.postalCode}
                         onChange={e => setEventDetails({ ...eventDetails, postalCode: e.target.value })}
-                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm"
+                        className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2 text-sm font-medium text-stone-900"
                       />
                     </div>
                   </div>

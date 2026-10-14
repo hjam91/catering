@@ -106,7 +106,7 @@ export default function Hero() {
 
               <div className="mb-5 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] flex items-center gap-2">
                 <span className="font-bold">⚠️ Notice:</span>
-                <span>Minimum 1 week notice required • Intimate & family events up to 50 guests max.</span>
+                <span>Limited to Brooklyn, NY • Minimum 1 week notice • Up to 50 guests max.</span>
               </div>
 
               <form onSubmit={handleQuickStart} className="space-y-5">

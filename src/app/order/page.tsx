@@ -432,7 +432,7 @@ function OrderWizardContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Wizard Form Body */}
-          <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm">
+          <div className={`${currentStep === 1 ? 'lg:col-span-12' : 'lg:col-span-8'} bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm`}>
             
             {/* STEP 1: CHOOSE MENU & GUEST COUNT */}
             {currentStep === 1 && (
@@ -542,7 +542,7 @@ function OrderWizardContent() {
                 {/* Sub-view: Curated Packages */}
                 {orderMode === 'package' && (
                   <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                       {packages.map(pkg => {
                         const isSelected = selectedPackageId === pkg.id;
                         return (
@@ -681,7 +681,7 @@ function OrderWizardContent() {
                     </div>
 
                     {/* Menu Item Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[520px] overflow-y-auto pr-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-h-[600px] overflow-y-auto pr-1">
                       {filteredMenuItems.map(item => {
                         const qty = selectedItems.get(item.id) || 0;
                         return (
@@ -1300,19 +1300,40 @@ function OrderWizardContent() {
               )}
 
               {currentStep < 5 ? (
-                <button
-                  type="button"
-                  onClick={handleNext}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-md shadow-amber-600/20 transition-all"
-                >
-                  <span>
-                    {currentStep === 1 && 'Continue to Step 2: Date & Delivery'}
-                    {currentStep === 2 && 'Continue to Step 3: Service Add-ons'}
-                    {currentStep === 3 && 'Continue to Step 4: Contact & Notes'}
-                    {currentStep === 4 && 'Continue to Step 5: Review & Confirm'}
-                  </span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-4">
+                  {currentStep === 1 && (
+                    <div className="text-right">
+                      {subtotal > 0 ? (
+                        <div>
+                          <span className="text-[11px] text-stone-500 block">
+                            {orderMode === 'package' && selectedPackage ? selectedPackage.name : `${itemsList.length} dish(es) selected`}:
+                          </span>
+                          <span className="text-sm font-bold text-amber-700">
+                            ${subtotal.toLocaleString()}
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-stone-400 italic">
+                          Select a package or trays above to proceed
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-md shadow-amber-600/20 transition-all"
+                  >
+                    <span>
+                      {currentStep === 1 && 'Continue to Step 2: Date & Delivery'}
+                      {currentStep === 2 && 'Continue to Step 3: Service Add-ons'}
+                      {currentStep === 3 && 'Continue to Step 4: Contact & Notes'}
+                      {currentStep === 4 && 'Continue to Step 5: Review & Confirm'}
+                    </span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               ) : (
                 <button
                   type="button"
@@ -1336,151 +1357,153 @@ function OrderWizardContent() {
             </div>
           </div>
 
-          {/* Sticky Order Price Summary Sidebar */}
-          <div className="lg:col-span-4 sticky top-28 space-y-4">
-            <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm">
-              <h3 className="font-extrabold text-stone-900 text-base mb-4 flex items-center justify-between pb-3 border-b border-stone-100">
-                <span>Order Summary</span>
-                <span className="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
-                  {eventDetails.guestCount} Guests
-                </span>
-              </h3>
-
-              <div className="space-y-3 text-xs">
-                {/* Menu & Logistics status preview */}
-                <div className="pb-3 border-b border-stone-100 space-y-2">
-                  <div className="flex justify-between items-start text-stone-600">
-                    <span className="text-stone-500 font-medium">Selected Menu:</span>
-                    {orderMode === 'package' && selectedPackage ? (
-                      <div className="text-right">
-                        <span className="font-bold text-stone-900 block max-w-[170px] truncate">
-                          {selectedPackage.name}
-                        </span>
-                        <span className="text-[11px] text-amber-700 font-semibold">
-                          ${selectedPackage.pricePerPerson}/guest × {eventDetails.guestCount}
-                        </span>
-                      </div>
-                    ) : orderMode === 'custom' && itemsList.length > 0 ? (
-                      <div className="text-right">
-                        <span className="font-bold text-stone-900 block">
-                          {itemsList.length} À la carte dish{itemsList.length > 1 ? 'es' : ''}
-                        </span>
-                        <span className="text-[11px] text-stone-500">
-                          Custom selection
-                        </span>
-                      </div>
-                    ) : (
-                      <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                        None selected yet
-                      </span>
-                    )}
-                  </div>
-
-                  {eventDetails.date && (
-                    <div className="flex justify-between text-stone-600">
-                      <span className="text-stone-500 font-medium">Event Date:</span>
-                      <span className="font-semibold text-stone-900">
-                        {eventDetails.date}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex justify-between text-stone-600">
-                    <span className="text-stone-500 font-medium">Service Style:</span>
-                    <span className="font-semibold text-stone-900 capitalize">
-                      {eventDetails.serviceStyle.replace(/_/g, ' ')}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Subtotals & Fees */}
-                <div className="space-y-2">
-                  <div className="flex justify-between text-stone-600">
-                    <span>Menu / Food Subtotal:</span>
-                    <span className="font-semibold text-stone-900">
-                      ${(packageTotal + itemsSubtotal).toLocaleString()}
-                    </span>
-                  </div>
-
-                  {addonsSubtotal > 0 && (
-                    <div className="flex justify-between text-stone-600">
-                      <span>Add-ons & Equipment:</span>
-                      <span className="font-semibold text-stone-900">
-                        ${addonsSubtotal.toLocaleString()}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex justify-between text-stone-600">
-                    <span>Kitchen Fee ({rules.serviceFeePercent || 10}%):</span>
-                    <span className="font-semibold text-stone-900">
-                      ${serviceFee.toLocaleString()}
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between text-stone-600">
-                    <span>Delivery & Setup (Brooklyn):</span>
-                    <span className="font-semibold text-stone-900">
-                      {subtotal === 0 ? (
-                        <span className="text-stone-400">Calculated on food</span>
-                      ) : deliveryFee === 0 ? (
-                        <span className="text-emerald-600 font-bold">FREE (${rules.freeDeliveryThreshold || 400}+)</span>
-                      ) : (
-                        `$${deliveryFee}`
-                      )}
-                    </span>
-                  </div>
-
-                  <div className="flex justify-between text-stone-600">
-                    <span>Estimated Sales Tax ({rules.taxRatePercent || 8.875}%):</span>
-                    <span className="font-semibold text-stone-900">
-                      ${estimatedTax.toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Grand total */}
-                <div className="pt-4 border-t border-stone-200 flex items-baseline justify-between">
-                  <div>
-                    <span className="text-xs uppercase tracking-wider font-bold text-stone-700 block">
-                      Estimated Total
-                    </span>
-                    {subtotal > 0 && (
-                      <span className="text-[11px] text-stone-400">
-                        ~${(grandTotal / (eventDetails.guestCount || 1)).toFixed(2)} / guest
-                      </span>
-                    )}
-                  </div>
-                  <span className="text-2xl font-black text-amber-700">
-                    ${grandTotal.toLocaleString()}
+          {/* Sticky Order Price Summary Sidebar (Only displayed on Step 2, 3, 4, 5 after menu selection) */}
+          {currentStep > 1 && (
+            <div className="lg:col-span-4 sticky top-28 space-y-4">
+              <div className="bg-white rounded-3xl p-6 border border-stone-200 shadow-sm">
+                <h3 className="font-extrabold text-stone-900 text-base mb-4 flex items-center justify-between pb-3 border-b border-stone-100">
+                  <span>Order Summary</span>
+                  <span className="text-xs font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
+                    {eventDetails.guestCount} Guests
                   </span>
-                </div>
+                </h3>
 
-                {subtotal === 0 && (
-                  <div className="mt-3 p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
-                    <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-                    <span>Please choose a curated package or add dishes from the menu to calculate your live catering pricing.</span>
+                <div className="space-y-3 text-xs">
+                  {/* Menu & Logistics status preview */}
+                  <div className="pb-3 border-b border-stone-100 space-y-2">
+                    <div className="flex justify-between items-start text-stone-600">
+                      <span className="text-stone-500 font-medium">Selected Menu:</span>
+                      {orderMode === 'package' && selectedPackage ? (
+                        <div className="text-right">
+                          <span className="font-bold text-stone-900 block max-w-[170px] truncate">
+                            {selectedPackage.name}
+                          </span>
+                          <span className="text-[11px] text-amber-700 font-semibold">
+                            ${selectedPackage.pricePerPerson}/guest × {eventDetails.guestCount}
+                          </span>
+                        </div>
+                      ) : orderMode === 'custom' && itemsList.length > 0 ? (
+                        <div className="text-right">
+                          <span className="font-bold text-stone-900 block">
+                            {itemsList.length} À la carte dish{itemsList.length > 1 ? 'es' : ''}
+                          </span>
+                          <span className="text-[11px] text-stone-500">
+                            Custom selection
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                          None selected yet
+                        </span>
+                      )}
+                    </div>
+
+                    {eventDetails.date && (
+                      <div className="flex justify-between text-stone-600">
+                        <span className="text-stone-500 font-medium">Event Date:</span>
+                        <span className="font-semibold text-stone-900">
+                          {eventDetails.date}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="flex justify-between text-stone-600">
+                      <span className="text-stone-500 font-medium">Service Style:</span>
+                      <span className="font-semibold text-stone-900 capitalize">
+                        {eventDetails.serviceStyle.replace(/_/g, ' ')}
+                      </span>
+                    </div>
                   </div>
-                )}
-              </div>
 
-              {/* Guarantees */}
-              <div className="mt-6 pt-5 border-t border-stone-100 space-y-2 text-[11px] text-stone-500">
-                <div className="flex items-center gap-1.5 text-stone-600 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>Transparent itemized breakdown</span>
+                  {/* Subtotals & Fees */}
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-stone-600">
+                      <span>Menu / Food Subtotal:</span>
+                      <span className="font-semibold text-stone-900">
+                        ${(packageTotal + itemsSubtotal).toLocaleString()}
+                      </span>
+                    </div>
+
+                    {addonsSubtotal > 0 && (
+                      <div className="flex justify-between text-stone-600">
+                        <span>Add-ons & Equipment:</span>
+                        <span className="font-semibold text-stone-900">
+                          ${addonsSubtotal.toLocaleString()}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="flex justify-between text-stone-600">
+                      <span>Kitchen Fee ({rules.serviceFeePercent || 10}%):</span>
+                      <span className="font-semibold text-stone-900">
+                        ${serviceFee.toLocaleString()}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between text-stone-600">
+                      <span>Delivery & Setup (Brooklyn):</span>
+                      <span className="font-semibold text-stone-900">
+                        {subtotal === 0 ? (
+                          <span className="text-stone-400">Calculated on food</span>
+                        ) : deliveryFee === 0 ? (
+                          <span className="text-emerald-600 font-bold">FREE (${rules.freeDeliveryThreshold || 400}+)</span>
+                        ) : (
+                          `$${deliveryFee}`
+                        )}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between text-stone-600">
+                      <span>Estimated Sales Tax ({rules.taxRatePercent || 8.875}%):</span>
+                      <span className="font-semibold text-stone-900">
+                        ${estimatedTax.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Grand total */}
+                  <div className="pt-4 border-t border-stone-200 flex items-baseline justify-between">
+                    <div>
+                      <span className="text-xs uppercase tracking-wider font-bold text-stone-700 block">
+                        Estimated Total
+                      </span>
+                      {subtotal > 0 && (
+                        <span className="text-[11px] text-stone-400">
+                          ~${(grandTotal / (eventDetails.guestCount || 1)).toFixed(2)} / guest
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-2xl font-black text-amber-700">
+                      ${grandTotal.toLocaleString()}
+                    </span>
+                  </div>
+
+                  {subtotal === 0 && (
+                    <div className="mt-3 p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
+                      <Info className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                      <span>Please choose a curated package or add dishes from the menu to calculate your live catering pricing.</span>
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center gap-1.5 text-stone-600 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>Temperature-guaranteed delivery</span>
-                </div>
-                <div className="flex items-center gap-1.5 text-stone-600 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>Flexible dietary modifications</span>
+
+                {/* Guarantees */}
+                <div className="mt-6 pt-5 border-t border-stone-100 space-y-2 text-[11px] text-stone-500">
+                  <div className="flex items-center gap-1.5 text-stone-600 font-medium">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Transparent itemized breakdown</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-stone-600 font-medium">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Temperature-guaranteed delivery</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-stone-600 font-medium">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Flexible dietary modifications</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </main>
 

@@ -52,10 +52,10 @@ function OrderWizardContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Step 1: Event Details
-  const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  // Step 1: Event Details - Minimum 1 week (7 days) advance notice required
+  const minNoticeDate = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
   const [eventDetails, setEventDetails] = useState<EventDetails>({
-    date: tomorrow,
+    date: minNoticeDate,
     time: '12:30',
     guestCount: 25,
     eventType: 'Family Daawat & Dinner',
@@ -96,7 +96,7 @@ function OrderWizardContent() {
     const typeParam = searchParams.get('type');
 
     if (guestsParam && !isNaN(Number(guestsParam))) {
-      setEventDetails(prev => ({ ...prev, guestCount: Math.max(10, Number(guestsParam)) }));
+      setEventDetails(prev => ({ ...prev, guestCount: Math.min(50, Math.max(10, Number(guestsParam))) }));
     }
     if (typeParam) {
       setEventDetails(prev => ({ ...prev, eventType: decodeURIComponent(typeParam) }));
@@ -207,8 +207,16 @@ function OrderWizardContent() {
         setErrorMessage('Please select an event date.');
         return false;
       }
+      if (eventDetails.date < minNoticeDate) {
+        setErrorMessage('We require at least 1 week (7 days) advance notice so Chef Umber can prepare fresh ingredients.');
+        return false;
+      }
       if (!eventDetails.guestCount || eventDetails.guestCount < 10) {
         setErrorMessage('Minimum guest count for catering orders is 10 guests.');
+        return false;
+      }
+      if (eventDetails.guestCount > 50) {
+        setErrorMessage('Maximum guest count is 50 guests. We specialize in intimate and medium family gatherings to preserve handcrafted home-cooked quality.');
         return false;
       }
       if (!eventDetails.address.trim()) {
@@ -397,16 +405,24 @@ function OrderWizardContent() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                      Event Date *
-                    </label>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700">
+                        Event Date (Min. 1 Week Notice) *
+                      </label>
+                      <span className="text-[10px] font-bold text-amber-800 bg-amber-100/80 px-2 py-0.5 rounded border border-amber-300">
+                        Min. 7 Days Notice
+                      </span>
+                    </div>
                     <input
                       type="date"
-                      min={tomorrow}
+                      min={minNoticeDate}
                       value={eventDetails.date}
                       onChange={e => setEventDetails({ ...eventDetails, date: e.target.value })}
-                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm text-stone-900 focus:outline-none focus:border-amber-600"
+                      className="w-full bg-stone-50 border border-stone-300 rounded-xl px-4 py-2.5 text-sm font-medium text-stone-900 focus:outline-none focus:border-amber-600"
                     />
+                    <p className="text-[11px] text-amber-800 mt-1.5 flex items-center gap-1 font-medium">
+                      <span>⏳ Minimum 1 week (7 days) notice required for kitchen prep.</span>
+                    </p>
                   </div>
 
                   <div>
@@ -426,33 +442,38 @@ function OrderWizardContent() {
                 <div>
                   <div className="flex justify-between items-center mb-1.5">
                     <label className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                      Estimated Guest Count (Min. 10) *
+                      Estimated Guest Count (10 – 50 Guests Max) *
                     </label>
                     <span className="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
-                      {eventDetails.guestCount} Guests
+                      {eventDetails.guestCount} Guests (Max 50)
                     </span>
                   </div>
                   <div className="flex items-center gap-4">
                     <input
                       type="range"
                       min="10"
-                      max="300"
-                      step="5"
+                      max="50"
+                      step="1"
                       value={eventDetails.guestCount}
-                      onChange={e => setEventDetails({ ...eventDetails, guestCount: Number(e.target.value) })}
+                      onChange={e => setEventDetails({ ...eventDetails, guestCount: Math.min(50, Math.max(10, Number(e.target.value))) })}
                       className="flex-1 accent-amber-600 h-2 bg-stone-200 rounded-lg cursor-pointer"
                     />
                     <input
                       type="number"
                       min="10"
-                      max="1000"
+                      max="50"
                       value={eventDetails.guestCount}
-                      onChange={e => setEventDetails({ ...eventDetails, guestCount: Math.max(1, Number(e.target.value)) })}
+                      onChange={e => setEventDetails({ ...eventDetails, guestCount: Math.min(50, Math.max(1, Number(e.target.value))) })}
                       className="w-24 bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-sm text-center font-bold text-stone-900"
                     />
                   </div>
+                  <div className="flex items-center justify-between mt-1 text-[11px] text-stone-500">
+                    <span>Min. 10 Guests</span>
+                    <span className="text-amber-700 font-semibold">Capped at 50 Guests for Homestyle Quality</span>
+                    <span>Max. 50 Guests</span>
+                  </div>
                   <div className="flex flex-wrap gap-2 mt-2.5">
-                    {[15, 25, 40, 60, 100, 150].map(cnt => (
+                    {[10, 15, 20, 25, 35, 45, 50].map(cnt => (
                       <button
                         key={cnt}
                         type="button"

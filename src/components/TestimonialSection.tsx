@@ -5,7 +5,7 @@ const REVIEWS = [
   {
     name: 'Aisha & Bilal Khan',
     role: 'Family Hosts',
-    event: 'Eid Family Daawat (65 Guests)',
+    event: 'Eid Family Daawat (45 Guests)',
     content: 'Every single guest asked who cooked this! Chef Umber\'s Dum Biryani was so aromatic and tender, and the Nargisi Koftay were absolute perfection. The trays arrived boiling hot and there were even generous portions left for everyone to take home.',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80'
@@ -13,7 +13,7 @@ const REVIEWS = [
   {
     name: 'Farah & Tariq Malik',
     role: 'Parents & Hosts',
-    event: 'Daughter\'s Quran Ameen & Sunday Brunch (40 Guests)',
+    event: 'Daughter\'s Quran Ameen & Sunday Brunch (35 Guests)',
     content: 'The flaky tawa parathas, bhuna qeema, and sarson ka saag tasted just like my mother\'s cooking in Lahore. The Badami Kheer in the Pyrex dish was gone in five minutes! Umbers Catering House made our special morning unforgettable.',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80'
@@ -21,7 +21,7 @@ const REVIEWS = [
   {
     name: 'Omar & Sana Siddiqui',
     role: 'Event Hosts',
-    event: 'Mehndi & Pre-Wedding Banquet (90 Guests)',
+    event: 'Pre-Wedding Dholki & Family Dinner (48 Guests)',
     content: 'From the chicken tikka skewers to the sizzling tawa roast and dahi bhallay, everything was 10/10. 100% Zabiha Halal, spotless presentation, and genuine family hospitality. We will never host another event without Umber!',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80'

@@ -57,7 +57,7 @@ export default function PackageCard({ pkg, featured }: PackageCardProps) {
           <div className="text-right">
             <span className="inline-flex items-center gap-1 text-xs font-medium bg-white px-2.5 py-1 rounded-full border border-stone-200 text-stone-700">
               <Users className="w-3.5 h-3.5 text-amber-600" />
-              <span>Min. {pkg.minGuests} guests</span>
+              <span>{pkg.minGuests}–50 guests</span>
             </span>
           </div>
         </div>

@@ -14,17 +14,25 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
           <div className="flex items-center gap-2">
             <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>✨ 100% Zabiha Halal • Authentic Home-Cooked Family Feasts & Daawat Trays</span>
+            <span>✨ 100% Zabiha Halal • Authentic Home-Cooked Feasts (Max 50 Guests • Min. 1 Week Advance Notice)</span>
           </div>
           <div className="flex items-center gap-4 text-amber-200/90">
+            <Link
+              href="/v2"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-900/80 hover:bg-emerald-800 text-emerald-200 border border-emerald-700 font-semibold text-[11px] transition-colors"
+            >
+              <Sparkles className="w-3 h-3 text-amber-400" />
+              <span>Explore V2 Luxury Atelier Style</span>
+            </Link>
+            <span className="hidden md:inline text-amber-800">|</span>
             <span className="flex items-center gap-1.5">
               <PhoneCall className="w-3.5 h-3.5 text-amber-400" />
-              <span>Direct Kitchen Hotline: (555) 728-6772</span>
+              <span>(555) 728-6772</span>
             </span>
             <span className="hidden md:inline text-amber-800">|</span>
             <Link href="/admin" className="hidden md:flex items-center gap-1 hover:text-amber-300 transition-colors">
               <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Kitchen Staff Portal</span>
+              <span>Staff Portal</span>
             </Link>
           </div>
         </div>
@@ -158,6 +166,14 @@ export default function Navbar() {
           </Link>
 
           <div className="pt-3 border-t border-stone-100 flex flex-col gap-2">
+            <Link
+              href="/v2"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full text-center py-2.5 rounded-xl bg-emerald-900 text-emerald-100 font-bold text-sm border border-emerald-700 flex items-center justify-center gap-2"
+            >
+              <Sparkles className="w-4 h-4 text-amber-400" />
+              <span>Explore V2 Luxury Atelier Style</span>
+            </Link>
             <Link
               href="/order"
               onClick={() => setMobileMenuOpen(false)}

@@ -516,12 +516,16 @@ export const CATERING_FAQS = [
     answer: 'Yes, absolutely. We strictly source 100% hand-slaughtered Zabiha Halal meats (chicken, beef, mutton) from trusted certified suppliers for every single dish prepared at Umbers Catering House.'
   },
   {
-    question: 'How do your catering tray sizes work?',
-    answer: 'Our Half Trays typically serve 10 to 12 guests generously. Our Full Trays serve 20 to 25 guests. If you choose our per-guest curated packages, we handle all portion calculations so your guests leave completely satisfied with plenty of seconds!'
+    question: 'How far in advance must I place an order?',
+    answer: 'We require a minimum of 1 week (7 days) advance notice for all catering orders. Because Chef Umber cooks authentic homestyle dishes from scratch with freshly ground spices and premium Halal meats marinated overnight, this notice guarantees reserved kitchen time and uncompromising quality.'
   },
   {
-    question: 'How far in advance should I book my family catering order?',
-    answer: 'For weekend family daawats, birthday parties, and small gatherings, 24 to 48 hours notice is ideal. For large milestone events like weddings, Eid feasts, Khatams, or gatherings over 50 guests, please contact us 1 to 2 weeks ahead to reserve your date.'
+    question: 'What is the maximum guest limit for catering?',
+    answer: 'We cater for intimate to medium-sized family gatherings with a strict maximum of 50 guests. Capping each event at 50 guests ensures that every single dish is cooked with the same love, rich taste, and artisanal attention as a private family meal.'
+  },
+  {
+    question: 'How do your catering tray sizes work?',
+    answer: 'Our Half Trays typically serve 10 to 12 guests generously. Our Full Trays serve 20 to 25 guests. If you choose our per-guest curated packages, we handle all portion calculations so your guests leave completely satisfied with plenty of seconds!'
   },
   {
     question: 'Does the food arrive hot and ready to serve?',

@@ -6,7 +6,7 @@ const STEPS = [
     step: '01',
     icon: CalendarCheck2,
     title: 'Pick Occasion & Headcount',
-    description: 'Whether it is a cozy 10-person family dinner, a weekend brunch, or a 150-guest wedding banquet, select your date and guest count.',
+    description: 'Select your event date with at least 1 week advance notice, and choose your headcount (up to 50 guests max for handcrafted home cooking quality).',
   },
   {
     step: '02',

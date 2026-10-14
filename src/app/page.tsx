@@ -41,6 +41,18 @@ export default function HomePage() {
         {/* Hero with interactive calculator */}
         <Hero />
 
+        {/* Advance Notice & Capacity Banner */}
+        <div className="bg-amber-100/90 border-b border-amber-300/80 px-4 py-3 text-center text-xs sm:text-sm text-amber-950 font-medium">
+          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-2">
+            <span className="font-bold bg-amber-800 text-white text-[11px] px-2 py-0.5 rounded-full uppercase tracking-wider">
+              Kitchen Booking Policy
+            </span>
+            <span>
+              Please allow a <strong>minimum 1 week (7 days) advance notice</strong> for all catering orders. Gatherings are limited to <strong>max 50 guests</strong> to preserve authentic, handcrafted home cooking.
+            </span>
+          </div>
+        </div>
+
         {/* Occasions / Service Types Strip */}
         <section className="py-12 bg-white border-b border-stone-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

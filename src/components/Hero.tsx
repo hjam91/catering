@@ -100,9 +100,14 @@ export default function Hero() {
               <h2 className="text-xl font-bold text-white mb-1">
                 Plan Your Family Gathering
               </h2>
-              <p className="text-xs text-stone-400 mb-6">
+              <p className="text-xs text-stone-400 mb-3">
                 Select your occasion and headcount to see instant budget guidelines and recommended homestyle packages.
               </p>
+
+              <div className="mb-5 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] flex items-center gap-2">
+                <span className="font-bold">⚠️ Notice:</span>
+                <span>Minimum 1 week notice required • Intimate & family events up to 50 guests max.</span>
+              </div>
 
               <form onSubmit={handleQuickStart} className="space-y-5">
                 <div>
@@ -128,7 +133,7 @@ export default function Hero() {
                   <div className="flex justify-between items-center mb-2">
                     <label className="text-xs font-semibold uppercase tracking-wider text-stone-300 flex items-center gap-1.5">
                       <Users className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Guest Headcount</span>
+                      <span>Guest Headcount (10 – 50 Max)</span>
                     </label>
                     <span className="text-sm font-bold bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-lg border border-amber-500/40">
                       {guestCount} Guests
@@ -137,16 +142,16 @@ export default function Hero() {
                   <input
                     type="range"
                     min="10"
-                    max="200"
-                    step="5"
+                    max="50"
+                    step="1"
                     value={guestCount}
                     onChange={(e) => setGuestCount(Number(e.target.value))}
                     className="w-full accent-amber-500 h-2 bg-stone-700 rounded-lg cursor-pointer"
                   />
                   <div className="flex justify-between text-[11px] text-stone-400 mt-1">
-                    <span>10 (Family Dinner)</span>
-                    <span>50 (Party)</span>
-                    <span>200+ (Grand Banquet)</span>
+                    <span>10 (Cozy Dinner)</span>
+                    <span>25 (Family Daawat)</span>
+                    <span>50 (Max Capacity)</span>
                   </div>
                 </div>
 

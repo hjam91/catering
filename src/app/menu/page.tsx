@@ -65,7 +65,7 @@ export default function MenuPage() {
         <div className="bg-stone-950 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-stone-850 relative overflow-hidden">
           <div className="absolute inset-0 z-0 opacity-25">
             <img
-              src="/images/real/IMG-20261013-WA0128.jpg"
+              src="/images/real/IMG-20261013-WA0115.jpg"
               alt="Catering Menu Banner"
               className="w-full h-full object-cover filter brightness-90"
             />

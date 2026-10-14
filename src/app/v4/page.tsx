@@ -31,7 +31,7 @@ const LUXURY_COLLECTIONS = [
     name: 'The Grand Daawat',
     sub: 'The quintessential slow-cooked Pakistani celebration',
     price: 36,
-    image: '/images/real/IMG-20261013-WA0128.jpg',
+    image: '/images/real/IMG-20261013-WA0115.jpg',
     heroTag: 'Iconic Daawat',
     courses: [
       {
@@ -177,7 +177,7 @@ const LUXURY_COLLECTIONS = [
 // Curated Photo Lookbook
 const LOOKBOOK = [
   {
-    image: '/images/real/IMG-20261013-WA0128.jpg',
+    image: '/images/real/IMG-20261013-WA0115.jpg',
     title: 'The Dum Biryani',
     caption: 'Long-grain basmati, charcoal steamed with whole cardamom & saffron milk.',
     span: 'col-span-12 md:col-span-7',
@@ -436,7 +436,7 @@ export default function LuxuryEditorialPage() {
             <div className="lg:col-span-4">
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-stone-800 group shadow-2xl">
                 <img
-                  src="/images/real/IMG-20261013-WA0128.jpg"
+                  src="/images/real/IMG-20261013-WA0115.jpg"
                   alt="Auntie Umber Dum Biryani"
                   className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />

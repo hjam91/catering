@@ -51,7 +51,7 @@ const BROOKLYN_PACKAGES = [
     tagline: 'The iconic slow-cooked feast inspired by NYC’s Little Pakistan',
     price: 36,
     badge: 'Coney Island Ave Signature',
-    image: '/images/real/IMG-20261013-WA0128.jpg',
+    image: '/images/real/IMG-20261013-WA0115.jpg',
     highlights: [
       'Degh-steamed Mutton or Chicken Dum Biryani with saffron basmati & fried onions',
       'Tawa-sizzled Chicken Karahi with fresh ginger matchsticks & crushed coriander',
@@ -124,7 +124,7 @@ const BROOKLYN_DISHES = [
   {
     title: 'Auntie Umber’s Degh Chicken Biryani',
     category: 'biryani',
-    image: '/images/real/IMG-20261013-WA0128.jpg',
+    image: '/images/real/IMG-20261013-WA0115.jpg',
     description: 'Long-grain aged basmati rice layered with yogurt-marinated tender chicken, saffron milk, fried onions, and whole toasted spices. Steamed in sealed heavy pots for unmatched aroma.',
     spiceLevel: 'Customizable (Mild to Lahori Hot)',
     tag: 'Coney Island Classic'

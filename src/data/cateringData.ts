@@ -166,7 +166,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 45,
     serves: '24 samosas (serves 12-15)',
     dietary: ['vegetarian', 'vegan', 'dairy-free', 'halal'],
-    image: '/images/real/IMG-20261013-WA0128.jpg'
+    image: '/images/real/IMG-20261013-WA0140.jpg'
   },
   {
     id: 'item-party-kabab-sticks',

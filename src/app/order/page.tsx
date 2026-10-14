@@ -10,6 +10,7 @@ import {
   SERVICE_ADDONS,
 } from '@/data/cateringData';
 import { saveClientOrder } from '@/lib/clientOrderStore';
+import { sendOrderEmailsWithBrevo } from '@/lib/brevo';
 import {
   MenuItem,
   CateringPackage,
@@ -302,15 +303,25 @@ function OrderWizardContent() {
       // 1. Save in client local persistence
       saveClientOrder(orderPayload);
 
-      // 2. Attempt server API call in background
+      // 2. Dispatch email notifications via Cloudflare Function & Brevo Provider
       try {
+        // A. Call backend API endpoint on Cloudflare Pages
         fetch('/api/orders', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(orderPayload),
-        }).catch(err => console.warn('Server sync optional:', err));
+        }).catch(err => console.warn('Cloudflare API dispatch notice:', err));
+
+        // B. Also trigger Brevo provider directly (with client-side fallback)
+        sendOrderEmailsWithBrevo(orderPayload).then(res => {
+          if (res.errors.length > 0) {
+            console.info('Brevo client notice:', res.errors.join('; '));
+          } else {
+            console.log('Brevo emails sent successfully!');
+          }
+        }).catch(err => console.warn('Brevo client dispatch notice:', err));
       } catch (err) {
-        console.warn('API sync skipped:', err);
+        console.warn('Email dispatch skipped:', err);
       }
 
       // 3. Immediately redirect to universal confirmation page

@@ -24,6 +24,11 @@ import {
   ShieldCheck,
   PackageCheck,
   X,
+  Settings,
+  Send,
+  Check,
+  Sparkles,
+  Key,
 } from 'lucide-react';
 
 const STATUS_CONFIG: Record<OrderStatus, { label: string; bg: string; text: string; border: string }> = {
@@ -36,6 +41,7 @@ const STATUS_CONFIG: Record<OrderStatus, { label: string; bg: string; text: stri
 };
 
 import { getClientOrders, updateClientOrderStatus } from '@/lib/clientOrderStore';
+import { getBrevoConfig, saveBrevoConfig, testBrevoEmail, BrevoConfig } from '@/lib/brevo';
 
 export default function AdminPage() {
   const [orders, setOrders] = useState<CateringOrder[]>([]);
@@ -44,6 +50,79 @@ export default function AdminPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedOrder, setSelectedOrder] = useState<CateringOrder | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+
+  // Brevo Settings State
+  const [showBrevoModal, setShowBrevoModal] = useState(false);
+  const [brevoConfig, setBrevoConfig] = useState<BrevoConfig>({
+    apiKey: '',
+    senderEmail: 'orders@umberscatering.com',
+    senderName: 'Umbers Food Catering Service',
+    notificationEmail: '',
+  });
+  const [saveSuccess, setSaveSuccess] = useState(false);
+  const [testEmailAddress, setTestEmailAddress] = useState('');
+  const [isTestingEmail, setIsTestingEmail] = useState(false);
+  const [testResult, setTestResult] = useState<{ success: boolean; message?: string; error?: string } | null>(null);
+
+  useEffect(() => {
+    setBrevoConfig(getBrevoConfig());
+  }, []);
+
+  const handleSaveBrevo = (e: React.FormEvent) => {
+    e.preventDefault();
+    saveBrevoConfig(brevoConfig);
+    setSaveSuccess(true);
+    setTimeout(() => setSaveSuccess(false), 3000);
+  };
+
+  const handleSendTestEmail = async () => {
+    if (!testEmailAddress.trim()) {
+      setTestResult({ success: false, error: 'Please enter a test recipient email address.' });
+      return;
+    }
+    setIsTestingEmail(true);
+    setTestResult(null);
+
+    try {
+      // 1. Try server endpoint first
+      const res = await fetch('/api/test-brevo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          apiKey: brevoConfig.apiKey,
+          senderEmail: brevoConfig.senderEmail,
+          senderName: brevoConfig.senderName,
+          recipientEmail: testEmailAddress.trim(),
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.success) {
+        setTestResult({ success: true, message: `Email delivered! Message ID: ${data.messageId || 'Accepted'}` });
+      } else {
+        // Fallback to direct client API call
+        const directRes = await testBrevoEmail(testEmailAddress.trim(), brevoConfig);
+        if (directRes.success) {
+          setTestResult({ success: true, message: `Direct email delivered! Message ID: ${directRes.messageId || 'Accepted'}` });
+        } else {
+          setTestResult({ success: false, error: directRes.error || data.error || 'Failed to dispatch test email.' });
+        }
+      }
+    } catch (err: any) {
+      try {
+        const directRes = await testBrevoEmail(testEmailAddress.trim(), brevoConfig);
+        if (directRes.success) {
+          setTestResult({ success: true, message: `Direct email delivered! Message ID: ${directRes.messageId || 'Accepted'}` });
+        } else {
+          setTestResult({ success: false, error: directRes.error || err.message });
+        }
+      } catch (err2: any) {
+        setTestResult({ success: false, error: err2.message || 'Network error' });
+      }
+    } finally {
+      setIsTestingEmail(false);
+    }
+  };
 
   // Fetch orders from local storage & API
   const fetchOrders = async () => {
@@ -144,7 +223,21 @@ export default function AdminPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
+            <button
+              type="button"
+              onClick={() => setShowBrevoModal(true)}
+              className="flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-stone-50 border border-stone-300 rounded-xl text-xs font-bold text-stone-700 shadow-sm transition-all"
+            >
+              <Mail className="w-3.5 h-3.5 text-orange-600" />
+              <span>Brevo Email Setup</span>
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  brevoConfig.apiKey ? 'bg-emerald-500' : 'bg-amber-400'
+                }`}
+                title={brevoConfig.apiKey ? 'Brevo Key Configured' : 'Brevo Key Not Set'}
+              />
+            </button>
             <button
               type="button"
               onClick={fetchOrders}
@@ -572,6 +665,217 @@ export default function AdminPage() {
                 >
                   Open Receipt Sheet
                 </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── BREVO EMAIL SETTINGS & TEST MODAL ───────────────────────── */}
+        {showBrevoModal && (
+          <div
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
+            onClick={() => setShowBrevoModal(false)}
+          >
+            <div
+              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden my-8"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div className="bg-gradient-to-r from-orange-600 via-amber-600 to-orange-700 p-6 text-white flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-black">Brevo Email Provider</h3>
+                    <p className="text-orange-100 text-xs">
+                      Automated Customer Confirmations & Kitchen Alerts
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowBrevoModal(false)}
+                  className="p-2 rounded-full hover:bg-white/20 text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
+                
+                {/* Info Callout */}
+                <div className="p-4 rounded-2xl bg-orange-50 border border-orange-200 text-xs text-orange-900 leading-relaxed flex items-start gap-3">
+                  <Sparkles className="w-4 h-4 text-orange-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong>How Brevo Email Works:</strong> When customers place a catering order on the site, Brevo automatically sends a branded HTML confirmation to the customer and delivers an instant alert to the kitchen.
+                  </div>
+                </div>
+
+                {/* Configuration Form */}
+                <form onSubmit={handleSaveBrevo} className="space-y-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 flex items-center gap-1.5">
+                    <Key className="w-3.5 h-3.5 text-amber-600" />
+                    <span>API Credentials</span>
+                  </h4>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-1">
+                      Brevo API Key (v3)
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="xkeysib-xxxxxxxxxxxxxxxxxxxxxxxx..."
+                      value={brevoConfig.apiKey}
+                      onChange={(e) => setBrevoConfig({ ...brevoConfig, apiKey: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs font-mono text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white"
+                    />
+                    <p className="text-[11px] text-stone-500 mt-1">
+                      Find in Brevo Dashboard → SMTP & API → API Keys.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">
+                        Verified Sender Email
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="orders@umberscatering.com"
+                        value={brevoConfig.senderEmail}
+                        onChange={(e) => setBrevoConfig({ ...brevoConfig, senderEmail: e.target.value })}
+                        className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white"
+                      />
+                      <p className="text-[10px] text-stone-500 mt-1">
+                        Must be a verified sender in your Brevo account.
+                      </p>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 mb-1">
+                        Sender Display Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Umbers Food Catering Service"
+                        value={brevoConfig.senderName}
+                        onChange={(e) => setBrevoConfig({ ...brevoConfig, senderName: e.target.value })}
+                        className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 mb-1">
+                      Kitchen / Chef Notification Email (Optional)
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="chefumber@gmail.com"
+                      value={brevoConfig.notificationEmail || ''}
+                      onChange={(e) => setBrevoConfig({ ...brevoConfig, notificationEmail: e.target.value })}
+                      className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 focus:outline-none focus:border-orange-500 focus:bg-white"
+                    />
+                    <p className="text-[10px] text-stone-500 mt-1">
+                      Where new booking alerts will be forwarded when customers submit orders.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-2">
+                    <button
+                      type="submit"
+                      className="px-5 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-bold text-xs shadow-md shadow-orange-600/20 transition-all flex items-center gap-1.5"
+                    >
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Save Brevo Configuration</span>
+                    </button>
+                    {saveSuccess && (
+                      <span className="text-emerald-600 text-xs font-bold flex items-center gap-1">
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span>Settings saved successfully!</span>
+                      </span>
+                    )}
+                  </div>
+                </form>
+
+                {/* Test Email Section */}
+                <div className="pt-6 border-t border-stone-200 space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 flex items-center gap-1.5">
+                    <Send className="w-3.5 h-3.5 text-orange-600" />
+                    <span>Send Connection Test Email</span>
+                  </h4>
+                  <p className="text-xs text-stone-600">
+                    Enter an email to test your Brevo API key and verify email deliverability.
+                  </p>
+
+                  <div className="flex gap-2">
+                    <input
+                      type="email"
+                      placeholder="your-email@example.com"
+                      value={testEmailAddress}
+                      onChange={(e) => setTestEmailAddress(e.target.value)}
+                      className="flex-1 px-3.5 py-2 bg-stone-50 border border-stone-300 rounded-xl text-xs text-stone-900 focus:outline-none focus:border-orange-500"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleSendTestEmail}
+                      disabled={isTestingEmail || !testEmailAddress.trim()}
+                      className="px-4 py-2 bg-stone-900 hover:bg-stone-800 disabled:opacity-50 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1.5"
+                    >
+                      {isTestingEmail ? (
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                      ) : (
+                        <Send className="w-3.5 h-3.5" />
+                      )}
+                      <span>{isTestingEmail ? 'Sending...' : 'Test Send'}</span>
+                    </button>
+                  </div>
+
+                  {testResult && (
+                    <div
+                      className={`p-3 rounded-xl text-xs ${
+                        testResult.success
+                          ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                          : 'bg-red-50 text-red-800 border border-red-200'
+                      }`}
+                    >
+                      {testResult.success ? (
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                          <span>{testResult.message}</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-2">
+                          <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+                          <span>Error: {testResult.error}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Cloudflare Pages Note */}
+                <div className="p-4 rounded-2xl bg-stone-100 border border-stone-200 text-xs text-stone-700 space-y-1.5">
+                  <div className="font-bold text-stone-900 flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-stone-600" />
+                    <span>Cloudflare Pages Production Deployment:</span>
+                  </div>
+                  <p className="text-[11px] leading-relaxed text-stone-600">
+                    To keep your API key secure on Cloudflare, add <code className="bg-white px-1.5 py-0.5 rounded border border-stone-300 font-mono text-[10px]">BREVO_API_KEY</code>, <code className="bg-white px-1.5 py-0.5 rounded border border-stone-300 font-mono text-[10px]">BREVO_SENDER_EMAIL</code>, and <code className="bg-white px-1.5 py-0.5 rounded border border-stone-300 font-mono text-[10px]">BREVO_NOTIFICATION_EMAIL</code> in your <strong>Cloudflare Dashboard → Pages → catering → Settings → Environment Variables</strong>.
+                  </p>
+                </div>
+
+              </div>
+
+              <div className="p-4 bg-stone-50 border-t border-stone-200 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setShowBrevoModal(false)}
+                  className="px-5 py-2 rounded-xl bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold text-xs transition-colors"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>

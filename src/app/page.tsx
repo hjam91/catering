@@ -180,7 +180,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Why Choose Umbers Catering House Strip */}
+        {/* Why Choose Umbers Food Catering Service Strip */}
         <section className="py-16 bg-amber-950 text-amber-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">

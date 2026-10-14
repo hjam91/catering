@@ -14,7 +14,7 @@ const REVIEWS = [
     name: 'Farah & Tariq Malik',
     role: 'Parents & Hosts',
     event: 'Daughter\'s Quran Ameen & Sunday Brunch (35 Guests)',
-    content: 'The flaky tawa parathas, bhuna qeema, and sarson ka saag tasted just like my mother\'s cooking in Lahore. The Badami Kheer in the Pyrex dish was gone in five minutes! Umbers Catering House made our special morning unforgettable.',
+    content: 'The flaky tawa parathas, bhuna qeema, and sarson ka saag tasted just like my mother\'s cooking in Lahore. The Badami Kheer in the Pyrex dish was gone in five minutes! Umbers Food Catering Service made our special morning unforgettable.',
     rating: 5,
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80'
   },

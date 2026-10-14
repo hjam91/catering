@@ -48,7 +48,7 @@ export default function Navbar() {
             </div>
             <div>
               <div className="text-xl font-bold tracking-tight text-stone-900 group-hover:text-amber-700 transition-colors">
-                UMBERS <span className="text-amber-600 font-serif italic">Catering House</span>
+                UMBERS <span className="text-amber-600 font-serif italic">Food Catering Service</span>
               </div>
               <div className="text-[11px] font-medium uppercase tracking-widest text-amber-800/80 flex items-center gap-1">
                 <span>Homestyle Family Cooking</span>

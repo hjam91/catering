@@ -15,7 +15,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-lg font-bold tracking-tight text-white">
-                  UMBERS <span className="text-amber-500 font-serif italic">Catering House</span>
+                  UMBERS <span className="text-amber-500 font-serif italic">Food Catering Service</span>
                 </div>
                 <div className="text-[10px] uppercase tracking-widest text-amber-400 font-medium">
                   Homestyle Family Feasts
@@ -91,7 +91,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-500 shrink-0" />
-                <span>orders@umberscateringhouse.com</span>
+                <span>orders@umbersfoodcateringservice.com</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Clock className="w-4 h-4 text-amber-500 shrink-0" />
@@ -127,7 +127,7 @@ export default function Footer() {
 
         {/* Bottom copyright */}
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 gap-4">
-          <p>© {new Date().getFullYear()} Umbers Catering House LLC. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Umbers Food Catering Service LLC. All rights reserved.</p>
           <div className="flex gap-6">
             <span>100% Zabiha Halal Certified</span>
             <span>Home-Cooked Freshness Guaranteed</span>

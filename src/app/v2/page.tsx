@@ -117,7 +117,7 @@ export default function V2AtelierPage() {
               </div>
               <div>
                 <div className="text-xl sm:text-2xl font-serif tracking-tight text-white group-hover:text-[#E5B842] transition-colors">
-                  UMBERS <span className="italic text-[#E5B842] font-light">Catering House</span>
+                  UMBERS <span className="italic text-[#E5B842] font-light">Food Catering Service</span>
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.25em] text-[#C4B290] font-sans">
                   The Royal Daawat Atelier • Est. 2026
@@ -185,7 +185,7 @@ export default function V2AtelierPage() {
               </h1>
 
               <p className="text-[#C4B290] text-base sm:text-lg max-w-2xl leading-relaxed font-light">
-                Welcome to <strong className="text-white font-semibold">Umbers Catering House</strong>. We reject mass-production catering. Every slow-cooked Biryani, royal Nargisi Kofta, and simmering Karahi is handcrafted from scratch by Chef Umber using hand-ground spices and 100% Zabiha Halal meats.
+                Welcome to <strong className="text-white font-semibold">Umbers Food Catering Service</strong>. We reject mass-production catering. Every slow-cooked Biryani, royal Nargisi Kofta, and simmering Karahi is handcrafted from scratch by Chef Umber using hand-ground spices and 100% Zabiha Halal meats.
               </p>
 
               {/* Guarantees Grid */}
@@ -275,7 +275,7 @@ export default function V2AtelierPage() {
               Why We Cap Gatherings at 50 Guests & Require 7 Days Notice
             </h2>
             <p className="text-[#C4B290] text-sm sm:text-base mt-3 leading-relaxed">
-              Industrial banquet halls cook for 500 guests with steam kettles and premade pastes. At Umbers Catering House, every dish is an artisanal creation.
+              Industrial banquet halls cook for 500 guests with steam kettles and premade pastes. At Umbers Food Catering Service, every dish is an artisanal creation.
             </p>
           </div>
 
@@ -818,7 +818,7 @@ export default function V2AtelierPage() {
                   <ChefHat className="w-5 h-5" />
                 </div>
                 <div className="text-lg font-serif text-white">
-                  UMBERS <span className="italic text-[#E5B842]">Catering</span>
+                  UMBERS <span className="italic text-[#E5B842]">Food Catering Service</span>
                 </div>
               </div>
               <p className="text-xs leading-relaxed text-[#A6977D]">
@@ -877,7 +877,7 @@ export default function V2AtelierPage() {
 
           <div className="pt-8 border-t border-stone-800 text-center text-xs text-[#A6977D] flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              © 2026 Umbers Catering House. All rights reserved.
+              © 2026 Umbers Food Catering Service. All rights reserved.
             </div>
             <div className="flex items-center gap-4">
               <Link href="/" className="hover:text-white transition-colors">V1 Classic Style</Link>

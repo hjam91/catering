@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Umbers Catering House | Homestyle Family Catering & Authentic Daawat Feasts",
+  title: "Umbers Food Catering Service | Homestyle Family Catering & Authentic Daawat Feasts",
   description: "Authentic, freshly home-cooked family-style catering. Generous trays of Biryani, Chicken Karahi, Shami Kebabs, Nargisi Koftay, Fresh Parathas, and Royal Badami Kheer. 100% Zabiha Halal.",
 };
 

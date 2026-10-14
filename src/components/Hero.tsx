@@ -25,7 +25,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <img
           src="/images/real/IMG-20261013-WA0168.jpg"
-          alt="Umbers Catering House Authentic Feast"
+          alt="Umbers Food Catering Service Authentic Feast"
           className="w-full h-full object-cover opacity-35 scale-105 filter brightness-90"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/85 to-stone-900/75"></div>
@@ -47,7 +47,7 @@ export default function Hero() {
             </h1>
 
             <p className="text-stone-200 text-base sm:text-lg max-w-2xl leading-relaxed">
-              Welcome to <span className="text-white font-semibold">Umbers Catering House</span>. From festive family daawats and Eid banquets to wedding celebrations and Sunday brunches, we prepare generous, mouth-watering homestyle trays delivered piping hot right to your table.
+              Welcome to <span className="text-white font-semibold">Umbers Food Catering Service</span>. From festive family daawats and Eid banquets to wedding celebrations and Sunday brunches, we prepare generous, mouth-watering homestyle trays delivered piping hot right to your table.
             </p>
 
             {/* Trust & Heritage Strip */}

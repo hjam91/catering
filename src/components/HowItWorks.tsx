@@ -37,7 +37,7 @@ export default function HowItWorks() {
             Stress-Free Family Hospitality
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 mt-2 tracking-tight">
-            How Umbers Catering House Works
+            How Umbers Food Catering Service Works
           </h2>
           <p className="text-stone-600 text-sm sm:text-base mt-3">
             Spend time with your loved ones and let Chef Umber take care of the cooking. Here is how easy it is to host an authentic feast.

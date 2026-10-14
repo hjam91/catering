@@ -1,6 +1,6 @@
 import { CateringOrder, OrderStatus } from '@/types/catering';
 
-const STORAGE_KEY = 'umbers_catering_house_orders';
+const STORAGE_KEY = 'umbers_food_catering_service_orders';
 
 export const SEED_ORDERS: CateringOrder[] = [
   {

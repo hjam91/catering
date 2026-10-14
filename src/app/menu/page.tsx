@@ -77,7 +77,7 @@ export default function MenuPage() {
               <span>100% Zabiha Halal • Authentic Homestyle Dishes</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              Umbers Homestyle Catering Menu
+              Umbers Food Catering Service Menu
             </h1>
             <p className="text-stone-300 text-sm sm:text-base max-w-2xl mx-auto mt-3">
               Explore our freshly prepared half and full steam trays. Slow-cooked with aromatic spices, fresh ingredients, and genuine maternal care.

@@ -133,7 +133,7 @@ export default function RealPhotoGallery() {
             Fresh From Chef Umber's Kitchen
           </h2>
           <p className="text-stone-600 text-sm sm:text-base mt-3 leading-relaxed">
-            Every dish we cater is authentic, freshly prepared, and home-cooked with generous portions. Take a look at some of the feasts, daawats, and catering orders prepared right here at Umbers Catering House!
+            Every dish we cater is authentic, freshly prepared, and home-cooked with generous portions. Take a look at some of the feasts, daawats, and catering orders prepared right here at Umbers Food Catering Service!
           </p>
         </div>
 

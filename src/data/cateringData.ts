@@ -513,7 +513,7 @@ export const SERVICE_ADDONS: ServiceAddon[] = [
 export const CATERING_FAQS = [
   {
     question: 'Are all meats 100% Halal?',
-    answer: 'Yes, absolutely. We strictly source 100% hand-slaughtered Zabiha Halal meats (chicken, beef, mutton) from trusted certified suppliers for every single dish prepared at Umbers Catering House.'
+    answer: 'Yes, absolutely. We strictly source 100% hand-slaughtered Zabiha Halal meats (chicken, beef, mutton) from trusted certified suppliers for every single dish prepared at Umbers Food Catering Service.'
   },
   {
     question: 'How far in advance must I place an order?',

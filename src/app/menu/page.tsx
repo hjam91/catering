@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MenuCard from '@/components/MenuCard';
 import { MENU_ITEMS, CATERING_PACKAGES } from '@/data/cateringData';
-import { MenuCategory, DietaryTag } from '@/types/catering';
+import { getEffectiveMenuItems } from '@/lib/pricingStore';
+import { MenuCategory, DietaryTag, MenuItem } from '@/types/catering';
 import {
   Search,
   Filter,
@@ -40,11 +41,19 @@ const DIETARY_TAGS: { id: DietaryTag | 'all'; label: string }[] = [
 ];
 
 export default function MenuPage() {
+  const [items, setItems] = useState<MenuItem[]>(MENU_ITEMS);
   const [selectedCategory, setSelectedCategory] = useState<MenuCategory | 'all'>('all');
   const [selectedDietary, setSelectedDietary] = useState<DietaryTag | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredItems = MENU_ITEMS.filter(item => {
+  useEffect(() => {
+    const refresh = () => setItems(getEffectiveMenuItems());
+    refresh();
+    window.addEventListener('umbers_pricing_updated', refresh);
+    return () => window.removeEventListener('umbers_pricing_updated', refresh);
+  }, []);
+
+  const filteredItems = items.filter(item => {
     const matchCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchDietary = selectedDietary === 'all' || item.dietary.includes(selectedDietary as DietaryTag);
     const query = searchQuery.toLowerCase().trim();

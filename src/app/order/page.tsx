@@ -9,6 +9,14 @@ import {
   MENU_ITEMS,
   SERVICE_ADDONS,
 } from '@/data/cateringData';
+import {
+  getEffectivePackages,
+  getEffectiveMenuItems,
+  getEffectiveAddons,
+  getEffectiveRules,
+  DEFAULT_GLOBAL_RULES,
+  GlobalCateringRules,
+} from '@/lib/pricingStore';
 import { saveClientOrder } from '@/lib/clientOrderStore';
 import { sendOrderEmailsWithBrevo } from '@/lib/brevo';
 import {
@@ -53,8 +61,25 @@ function OrderWizardContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Step 1: Event Details - Minimum 1 week (7 days) advance notice required
-  const minNoticeDate = new Date(Date.now() + 7 * 86400000).toISOString().split('T')[0];
+  // Step 1: Event Details - Dynamic minimum notice & limits from settings
+  const [packages, setPackages] = useState<CateringPackage[]>(CATERING_PACKAGES);
+  const [menuItems, setMenuItems] = useState<(MenuItem & { isAvailable?: boolean })[]>(MENU_ITEMS);
+  const [serviceAddons, setServiceAddons] = useState<ServiceAddon[]>(SERVICE_ADDONS);
+  const [rules, setRules] = useState<GlobalCateringRules>(DEFAULT_GLOBAL_RULES);
+
+  useEffect(() => {
+    const refreshPricing = () => {
+      setPackages(getEffectivePackages());
+      setMenuItems(getEffectiveMenuItems());
+      setServiceAddons(getEffectiveAddons());
+      setRules(getEffectiveRules());
+    };
+    refreshPricing();
+    window.addEventListener('umbers_pricing_updated', refreshPricing);
+    return () => window.removeEventListener('umbers_pricing_updated', refreshPricing);
+  }, []);
+
+  const minNoticeDate = new Date(Date.now() + (rules.minNoticeDays || 7) * 86400000).toISOString().split('T')[0];
   const [eventDetails, setEventDetails] = useState<EventDetails>({
     date: minNoticeDate,
     time: '12:30',
@@ -97,13 +122,13 @@ function OrderWizardContent() {
     const typeParam = searchParams.get('type');
 
     if (guestsParam && !isNaN(Number(guestsParam))) {
-      setEventDetails(prev => ({ ...prev, guestCount: Math.min(50, Math.max(10, Number(guestsParam))) }));
+      setEventDetails(prev => ({ ...prev, guestCount: Math.min(rules.maxGuests || 50, Math.max(rules.minGuests || 10, Number(guestsParam))) }));
     }
     if (typeParam) {
       setEventDetails(prev => ({ ...prev, eventType: decodeURIComponent(typeParam) }));
     }
     if (pkgParam) {
-      const foundPkg = CATERING_PACKAGES.find(p => p.id === pkgParam);
+      const foundPkg = packages.find(p => p.id === pkgParam) || CATERING_PACKAGES.find(p => p.id === pkgParam);
       if (foundPkg) {
         setOrderMode('package');
         setSelectedPackageId(foundPkg.id);
@@ -117,10 +142,10 @@ function OrderWizardContent() {
         return next;
       });
     }
-  }, [searchParams]);
+  }, [searchParams, packages, rules]);
 
-  // Calculations
-  const selectedPackage = CATERING_PACKAGES.find(p => p.id === selectedPackageId);
+  // Calculations with dynamic admin pricing
+  const selectedPackage = packages.find(p => p.id === selectedPackageId);
   const packageTotal = orderMode === 'package' && selectedPackage
     ? selectedPackage.pricePerPerson * eventDetails.guestCount
     : 0;
@@ -129,7 +154,7 @@ function OrderWizardContent() {
   const itemsList: SelectedItem[] = [];
   selectedItems.forEach((qty, itemId) => {
     if (qty > 0) {
-      const item = MENU_ITEMS.find(m => m.id === itemId);
+      const item = menuItems.find(m => m.id === itemId);
       if (item) {
         const cost = item.pricingType === 'per_person' ? item.price * eventDetails.guestCount : item.price * qty;
         itemsSubtotal += cost;
@@ -150,7 +175,7 @@ function OrderWizardContent() {
   const addonsList: SelectedAddon[] = [];
   selectedAddons.forEach((qty, addonId) => {
     if (qty > 0) {
-      const addon = SERVICE_ADDONS.find(a => a.id === addonId);
+      const addon = serviceAddons.find(a => a.id === addonId);
       if (addon) {
         const cost = addon.unit === 'per_person' ? addon.price * eventDetails.guestCount : addon.price * qty;
         addonsSubtotal += cost;
@@ -166,9 +191,9 @@ function OrderWizardContent() {
   });
 
   const subtotal = packageTotal + itemsSubtotal + addonsSubtotal;
-  const serviceFee = Math.round(subtotal * 0.10 * 100) / 100; // 10% event coordination & kitchen prep
-  const deliveryFee = subtotal >= 300 ? 0 : 50; // free delivery over $300
-  const estimatedTax = Math.round((subtotal + serviceFee) * 0.08875 * 100) / 100;
+  const serviceFee = Math.round(subtotal * ((rules.serviceFeePercent || 10) / 100) * 100) / 100;
+  const deliveryFee = subtotal >= (rules.freeDeliveryThreshold || 500) ? 0 : (rules.flatDeliveryFee || 35);
+  const estimatedTax = Math.round((subtotal + serviceFee) * ((rules.taxRatePercent || 8.875) / 100) * 100) / 100;
   const grandTotal = Math.round((subtotal + serviceFee + deliveryFee + estimatedTax) * 100) / 100;
 
   // Item quantity controls
@@ -334,7 +359,7 @@ function OrderWizardContent() {
   };
 
   // Filtered menu items for Step 2
-  const filteredMenuItems = MENU_ITEMS.filter(item => {
+  const filteredMenuItems = menuItems.filter(item => {
     const matchCategory = activeCategory === 'all' || item.category === activeCategory;
     const matchDietary = dietaryFilter === 'all' || item.dietary.includes(dietaryFilter as DietaryTag);
     return matchCategory && matchDietary;
@@ -674,7 +699,7 @@ function OrderWizardContent() {
                 {orderMode === 'package' && (
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                      {CATERING_PACKAGES.map(pkg => {
+                      {packages.map(pkg => {
                         const isSelected = selectedPackageId === pkg.id;
                         return (
                           <div
@@ -892,7 +917,7 @@ function OrderWizardContent() {
                 </div>
 
                 <div className="space-y-4">
-                  {SERVICE_ADDONS.map(addon => {
+                  {serviceAddons.map(addon => {
                     const qty = selectedAddons.get(addon.id) || 0;
                     const isPerPerson = addon.unit === 'per_person';
                     const isFlat = addon.unit === 'flat';

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getOrderById } from '@/lib/orderStore';
+import { getOrderById, getAllOrders } from '@/lib/orderStore';
 import { OrderStatus } from '@/types/catering';
 import {
   CheckCircle2,
@@ -24,6 +24,11 @@ import PrintButton from './PrintButton';
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const orders = await getAllOrders();
+  return orders.map(o => ({ id: o.id }));
 }
 
 const STATUS_STEPS: { status: OrderStatus; label: string; icon: any }[] = [

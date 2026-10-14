@@ -35,6 +35,8 @@ const STATUS_CONFIG: Record<OrderStatus, { label: string; bg: string; text: stri
   cancelled: { label: 'Cancelled', bg: 'bg-red-50', text: 'text-red-700', border: 'border-red-200' },
 };
 
+import { getClientOrders, updateClientOrderStatus } from '@/lib/clientOrderStore';
+
 export default function AdminPage() {
   const [orders, setOrders] = useState<CateringOrder[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,17 +45,24 @@ export default function AdminPage() {
   const [selectedOrder, setSelectedOrder] = useState<CateringOrder | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
-  // Fetch orders from API
+  // Fetch orders from local storage & API
   const fetchOrders = async () => {
     setLoading(true);
+    const local = getClientOrders();
+    setOrders(local);
+
     try {
       const res = await fetch('/api/orders');
-      const data = await res.json();
-      if (data.success && data.orders) {
-        setOrders(data.orders);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && data.orders && data.orders.length > 0) {
+          const ids = new Set(data.orders.map((o: any) => o.id));
+          const merged = [...data.orders, ...local.filter(o => !ids.has(o.id))];
+          setOrders(merged);
+        }
       }
     } catch (err) {
-      console.error('Failed to load catering orders:', err);
+      // Offline or static edge fallback: local state already set!
     } finally {
       setLoading(false);
     }
@@ -63,25 +72,28 @@ export default function AdminPage() {
     fetchOrders();
   }, []);
 
-  // Update order status
+  // Update order status with instant client persistence & optional API sync
   const handleUpdateStatus = async (orderId: string, newStatus: OrderStatus) => {
     setUpdatingId(orderId);
+    
+    // 1. Update in local storage
+    updateClientOrderStatus(orderId, newStatus);
+    
+    // 2. Update state in UI immediately
+    setOrders(prev => prev.map(o => (o.id === orderId ? { ...o, status: newStatus } : o)));
+    if (selectedOrder && selectedOrder.id === orderId) {
+      setSelectedOrder(prev => prev ? { ...prev, status: newStatus } : null);
+    }
+
+    // 3. Attempt API sync
     try {
-      const res = await fetch(`/api/orders/${orderId}`, {
+      fetch(`/api/orders/${orderId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
-      });
-      const data = await res.json();
-      if (data.success && data.order) {
-        // Update state in place
-        setOrders(prev => prev.map(o => (o.id === orderId ? data.order : o)));
-        if (selectedOrder && selectedOrder.id === orderId) {
-          setSelectedOrder(data.order);
-        }
-      }
+      }).catch(() => {});
     } catch (err) {
-      console.error('Failed to update status:', err);
+      // Ignored in static mode
     } finally {
       setUpdatingId(null);
     }

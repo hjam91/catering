@@ -18,7 +18,7 @@ export default function TrackOrderPage() {
       setError('Please enter your catering order code (e.g. CAT-8105).');
       return;
     }
-    router.push(`/order/${cleanId}`);
+    router.push(`/order/confirmation?id=${cleanId}`);
   };
 
   return (

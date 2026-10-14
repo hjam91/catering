@@ -9,6 +9,7 @@ import {
   MENU_ITEMS,
   SERVICE_ADDONS,
 } from '@/data/cateringData';
+import { saveClientOrder } from '@/lib/clientOrderStore';
 import {
   MenuItem,
   CateringPackage,
@@ -250,7 +251,7 @@ function OrderWizardContent() {
     window.scrollTo({ top: 120, behavior: 'smooth' });
   };
 
-  // Submit order to API
+  // Submit order to API & client store
   const handleSubmitOrder = async () => {
     if (!validateStep(4)) return;
 
@@ -279,19 +280,22 @@ function OrderWizardContent() {
     };
 
     try {
-      const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderPayload),
-      });
+      // 1. Save in client local persistence
+      const newOrder = saveClientOrder(orderPayload);
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || 'Failed to submit catering order.');
+      // 2. Attempt server API call in background
+      try {
+        fetch('/api/orders', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newOrder),
+        }).catch(err => console.warn('Server sync optional:', err));
+      } catch (err) {
+        console.warn('API sync skipped:', err);
       }
 
-      // Successful creation! Redirect to confirmation tracking page
-      router.push(`/order/${data.order.id}`);
+      // 3. Immediately redirect to universal confirmation page
+      router.push(`/order/confirmation?id=${newOrder.id}`);
     } catch (err: any) {
       console.error(err);
       setErrorMessage(err.message || 'An unexpected error occurred. Please try again.');

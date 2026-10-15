@@ -22,10 +22,10 @@ export default function TrackOrderPage() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-50 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1 max-w-xl w-full mx-auto px-4 py-20 flex flex-col justify-center">
+      <main className="flex-1 max-w-xl w-full mx-auto px-4 py-20 flex flex-col justify-center overflow-x-hidden">
         <div className="bg-white rounded-3xl p-8 border border-stone-200 shadow-sm text-center">
           <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto mb-4">
             <Search className="w-7 h-7" />

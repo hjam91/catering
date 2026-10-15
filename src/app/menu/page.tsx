@@ -66,10 +66,10 @@ export default function MenuPage() {
   });
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-50 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         {/* Hero Header */}
         <div className="bg-stone-950 text-white py-16 px-4 sm:px-6 lg:px-8 border-b border-stone-850 relative overflow-hidden">
           <div className="absolute inset-0 z-0 opacity-25">

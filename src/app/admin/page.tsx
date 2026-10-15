@@ -324,11 +324,11 @@ export default function AdminPage() {
   });
 
   return (
-    <div className="min-h-screen bg-stone-100 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-100 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       {/* ============================================================== */}
       {/* DEDICATED ADMIN HEADER - PURPOSE BUILT, NO CLIENT NAV WRAPPING */}
       {/* ============================================================== */}
-      <header className="sticky top-0 z-50 bg-stone-900 text-white border-b border-stone-800 shadow-xl">
+      <header className="sticky top-0 z-50 bg-stone-900 text-white border-b border-stone-800 shadow-xl w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 gap-4">
             {/* Brand Logo & Portal Identity */}

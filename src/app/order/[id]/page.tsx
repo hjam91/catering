@@ -70,10 +70,10 @@ export default async function OrderConfirmationPage({ params }: PageProps) {
   const isCancelled = order.status === 'cancelled';
 
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-50 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 overflow-x-hidden">
         {/* Breadcrumb & Actions */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <Link

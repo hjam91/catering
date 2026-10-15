@@ -427,9 +427,9 @@ function ConfirmationContent() {
 
 export default function OrderConfirmationPage() {
   return (
-    <div className="min-h-screen bg-stone-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-stone-50 flex flex-col justify-between w-full max-w-full overflow-x-hidden">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 w-full max-w-full overflow-x-hidden">
         <Suspense fallback={
           <div className="py-20 text-center">
             <Loader2 className="w-8 h-8 animate-spin text-amber-600 mx-auto mb-3" />
